@@ -105,13 +105,13 @@ export default {
       a[0].map((item, index) => {
         a.map(ite => {
           this.x.push(ite[index])
-          console.log(this.x);
+          // console.log(this.x);
         })
         this.z.push(this.x.splice(a.length, a.length))
       })
       this.z[0] = this.x
       // console.log(this.x,this.z);
-      console.log(this.z);
+      // console.log(this.z);
       this.z.unshift([])
       return this.z
     },
@@ -135,12 +135,6 @@ export default {
           {
             // prettier-ignore
             source: this.source
-          },
-          {
-            transform: {
-              type: 'boxplot',
-              config: ''
-            }
           },
           {
             fromDatasetIndex: 1,
@@ -167,7 +161,8 @@ export default {
           },
           splitLine: {
             show: false
-          }
+          },
+          data:this.dataSource[0]
         },
         yAxis: {
           type: 'value',

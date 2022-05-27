@@ -1,7 +1,7 @@
 {
-  "id": "3557666a-0517-479a-b220-2a5ffcecc166",
+  "id": "f7246f07-df9c-4e09-89dd-d7f3eb1357f8",
   "type": "analyzers",
-  "main": "app.bb908e50.js",
+  "main": "app.336d3acd.js",
   "version": "2",
   "props": {
     "img": "custom_table.png",
