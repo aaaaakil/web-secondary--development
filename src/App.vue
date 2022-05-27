@@ -44,7 +44,7 @@ export default {
       x: [],
       y: [],
       z: [],
-      source:[]
+      source: []
     };
   },
   // computed: {
@@ -115,7 +115,7 @@ export default {
       this.z.unshift([])
       return this.z
     },
-    handlerData(){
+    handlerData() {
       this.source = this.all(this.dataSource)
     },
     eChartsInit() {
