@@ -1,7 +1,7 @@
 {
   "id": "44129faa-6b68-4190-b680-1e5b08c1498b",
   "type": "analyzers",
-  "main": "app.e3aa906d.js",
+  "main": "app.f7b835a1.js",
   "version": "2",
   "props": {
     "img": "custom_table.png",
@@ -14,7 +14,11 @@
     "scriptName": "app.a515a2e6.js",
     "optionModules": [],
     "vars": [
-      "bgColor"
+      "bgColor",
+      "title",
+      "position",
+      "titlefontSize",
+      "titlefontColor"
     ]
   }
 }

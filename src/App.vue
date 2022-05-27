@@ -28,7 +28,11 @@ export default {
       default: () => ({
         // 配置项从externalVariables里取
         externalVariables: {
-          bgColor: ''
+          bgColor: '',
+          tiTle: '',
+          position: '',
+          titlefontSize: '',
+          titlefontColor: ''
         },
       }),
     },
@@ -61,6 +65,7 @@ export default {
   //   },
   // },
   mounted() {
+    // console.log(this.options.externalVariables.tiTle);
     this.handlerData()
     const events = [
       {
@@ -119,6 +124,7 @@ export default {
       this.source = this.all(this.dataSource)
     },
     eChartsInit() {
+      // console.log(this.options.externalVariables.tiTle);
       // var chartDom = document.getElementById('main');
       var chartDom = this.$refs.main
       var myChart = echarts.init(chartDom);
@@ -127,8 +133,12 @@ export default {
       option = {
         title: [
           {
-            text: '盒须图',
-            left: 'left'
+            text: this.options.externalVariables.tiTle ? this.options.externalVariables.tiTle : '标题',
+            left: this.options.externalVariables.position ? this.options.externalVariables.position : 'center',
+            textStyle: {
+              fontSize: this.options.externalVariables.titlefontSize ? this.options.externalVariables.titlefontSize : '18px',
+              color: this.options.externalVariables.titlefontColor ? this.options.externalVariables.titlefontColor : '#464646'
+            }
           },
         ],
         dataset: [
@@ -162,7 +172,7 @@ export default {
           splitLine: {
             show: false
           },
-          data:this.dataSource[0]
+          data: this.dataSource[0]
         },
         yAxis: {
           type: 'value',
