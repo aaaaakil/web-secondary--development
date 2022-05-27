@@ -41,7 +41,7 @@ if (dom) {
     );
     const options = {
       externalVariables: {
-        bgColor: ''
+        bgColor:''
       },
     };
     const props = {
