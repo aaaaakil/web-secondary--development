@@ -86,17 +86,13 @@ export default {
   },
   methods: {
     all(a) {
-      // console.log(a);
       a[0].map((item, index) => {
         a.map(ite => {
           this.x.push(ite[index])
-          // console.log(this.x);
         })
         this.z.push(this.x.splice(a.length, a.length))
       })
       this.z[0] = this.x
-      // console.log(this.x,this.z);
-      // console.log(this.z);
       this.z.unshift([])
       return this.z
     },
