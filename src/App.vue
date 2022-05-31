@@ -69,11 +69,11 @@ export default {
     // console.log(this.options.externalVariables.tiTle);
     this.handlerData()
     const events = [
-
+      
     ];
 
     const actions = [
-
+      
     ];
 
     this.componentId &&
