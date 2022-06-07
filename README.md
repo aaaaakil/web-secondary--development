@@ -26,11 +26,11 @@
     npm i sdata-cli -g
   ```
   3. 安装完成后，运行scli i，选择对应模块及框架
-  4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)即可开始进行开发
 + github方式
   1. 本地下载github仓库[https://github.com/Orochi-sx/web-secondary--development](https://github.com/Orochi-sx/web-secondary--development/)
   2. 切换对应的分支及插件类型，如vue版本的应用插件为vue-version-app
-  3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)即可开始进行开发
 
 ## 插件包文件说明
 | 文件名 | 说明                                                                                                                               |
@@ -41,9 +41,9 @@
 | scripts | scripts目录下是开发服务器启动和打包脚本，一般不需要改动。                                                                                                 |
 | src | src 目录下是插件的源码，用户在此目录下开发定制代码。                                                                                                     |
 | src/api | src/api下的文件是接口层，可以添加自己需要的Http 接口。                                                                                                |
-| src/App.vue | src/App.js 是插件组件的主文件，用于开发插件的 Vue 组件。                                                                                           |
+| src/App.vue | src/App.vue 是插件组件的主文件，用于开发插件的 Vue 组件。                                                                                           |
 | src/main.js | src/main.js 是加载入口，除了构造开发的 mock 数据外一般不需要修改。                                                                                      |
-| proxy.js | webpack proxy 配置，在开发时如果需要调用 http 请求，可以在这里配置代理，可以参考示例或者 [webpack 官方文档](https://webpack.docschina.org/configuration/dev-server/) 。 |
+| vue.config.js | webpack 配置，在开发时如果需要调用 http 请求，可以在这里配置代理，可以参考示例或者 [webpack 官方文档](https://webpack.docschina.org/configuration/dev-server/) 。 |
 
 ## config.json配置文件字段说明
 
@@ -56,7 +56,7 @@
 | props   | 传递插件自定义相关属性。不同模块的自定义属性不同,请参见数据交互章节讲解。                                                           |
 ## 文件结构
 ### 分析仪
-分析仪页面只有一个主页面文件，通常为App.vue/App.js
+分析仪页面只有一个主页面文件，通常为App.vue
 ## 数据交互
 ### 分析仪
 **`定义用户输入`**
