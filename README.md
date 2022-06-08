@@ -26,11 +26,11 @@
     npm i sdata-cli -g
   ```
   3. 安装完成后，运行scli i，选择对应模块及框架
-  4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  4. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)即可开始进行开发
 + github方式
   1. 本地下载github仓库[https://github.com/Orochi-sx/web-secondary--development](https://github.com/Orochi-sx/web-secondary--development/)
   2. 切换对应的分支及插件类型，如vue版本的应用插件为vue-version-app
-  3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)/npm run start(React版本)即可开始进行开发
+  3. npm i或者yarn install安装相关依赖项，运行npm run serve(Vue版本)即可开始进行开发
 
 ## 插件包文件说明
 | 文件名 | 说明                                                                                                                               |
@@ -41,23 +41,22 @@
 | scripts | scripts目录下是开发服务器启动和打包脚本，一般不需要改动。                                                                                                 |
 | src | src 目录下是插件的源码，用户在此目录下开发定制代码。                                                                                                     |
 | src/api | src/api下的文件是接口层，可以添加自己需要的Http 接口。                                                                                                |
-| src/App.js | src/App.js 是插件组件的主文件，用于开发插件的 react 组件。                                                                                           |
-| src/index.js | src/index.js 是加载入口，除了构造开发的 mock 数据外一般不需要修改。                                                                                      |
-| proxy.js | webpack proxy 配置，在开发时如果需要调用 http 请求，可以在这里配置代理，可以参考示例或者 [webpack 官方文档](https://webpack.docschina.org/configuration/dev-server/) 。 |
+| src/App.vue | src/App.vue 是插件组件的主文件，用于开发插件的 Vue 组件。                                                                                           |
+| src/main.js | src/main.js 是加载入口，除了构造开发的 mock 数据外一般不需要修改。                                                                                      |
+| vue.config.js | webpack 配置，在开发时如果需要调用 http 请求，可以在这里配置代理，可以参考示例或者 [webpack 官方文档](https://webpack.docschina.org/configuration/dev-server/) 。 |
 
 ## config.json配置文件字段说明
 
 | 参数      | 参数说明                                                                                            |
 |---------|-------------------------------------------------------------------------------------------------|
 | id      | 插件标识，用户在下载插件模板时，系统自动生成，用户无需自定义。                                                                 |
-| type    | 开发插件类型，主要包括如下类型：<br/> analyzer：分析仪;
+| type    | 开发插件类型：<br/>analyzer：分析仪;
 | main    | 插件打包后生成的上级JS文件名，插件打包时会自动更新此参数，用户无需手动配置。                                  |
 | version | 标识插件的版本，目前默认取值为“2”。                                                                             |
 | props   | 传递插件自定义相关属性。不同模块的自定义属性不同,请参见数据交互章节讲解。                                                           |
 ## 文件结构
 ### 分析仪
-分析仪页面只有一个主页面文件，通常为App.vue/App.js
-
+分析仪页面只有一个主页面文件，通常为App.vue
 ## 数据交互
 ### 分析仪
 **`定义用户输入`**
@@ -65,9 +64,9 @@
 config.json,vars配置项
 
 **`接收用户输入`**
-* react version
+* vue version
   
-  this.props.options?.externalVariables
+  this.options?.externalVariables
 
 ## 数据源的获取
 **`props.datasource`**
@@ -218,10 +217,10 @@ class EventBus {
 export default new EventBus();
 ```
 ## 远程调试
-+ react版本
-  1. 修改proxy.js的target字段为代理地址
++ vue版本
+  1. 修改vue.config.js的target字段为代理地址，
   2. 修改src/api/request.js中document.cookie的token和refreshToken字段为代理地址请求头的相应字段
-  3. npm run start
+  3. npm run serve
 
 ## 插件的上传及使用
 ### 插件上传
@@ -270,12 +269,11 @@ export default new EventBus();
 
 7. 点击其他，选择新创建的二次开发插件
 
-![](https://img.kancloud.cn/f0/68/f06822370cc50469091ec5e9a8022d5c_1285x792.png)
+![](./images/1654591566(1).png)
 
 8. 点击右侧配置栏，如果插件所需要变量则在这里输入
 
-![](./images/1654593087(1).png)
-
+![](./images/1654591666(1).png)
 
 ## 功能验证
 + 上传二开插件包到验证环境上，写入对应的配置字段即可。基本的功能验证与本地调试基本一致
