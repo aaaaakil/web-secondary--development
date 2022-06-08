@@ -131,6 +131,10 @@ const actions = [
   {
     key: "setValue",
     name: "设值",
+<<<<<<< HEAD
+=======
+    isSupportChild: true, // 是否支持子表(填报组件)
+>>>>>>> 773b9667061bde52105d91f44bbc2a7135425578
     params: [
       {
         key: "value",
@@ -142,6 +146,10 @@ const actions = [
   {
     key: "getValue",
     name: "取值",
+<<<<<<< HEAD
+=======
+    isSupportChild: true, // 是否支持子表(填报组件)
+>>>>>>> 773b9667061bde52105d91f44bbc2a7135425578
     hasReturn: true,
     returns: [
       {
