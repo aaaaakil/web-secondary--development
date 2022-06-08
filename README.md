@@ -83,7 +83,7 @@ config.json,vars配置项
 
 **`用户配置`**
 
-通过customConfig.configuration获得（填报独有）
+通过props.options.externalVariables获得
 
 ## 行为交互（逻辑控制）
 ### 概念引入
