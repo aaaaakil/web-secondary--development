@@ -81,10 +81,6 @@ config.json,vars配置项
 
 调用queryAssetById接口，使用数据图书馆资产
 
-**`用户配置`**
-
-通过props.options.externalVariables获得
-
 ## 行为交互（逻辑控制）
 ### 概念引入
 
