@@ -1,36 +1,48 @@
 <template>
   <div class="bigest">
-    <div class="mask">
+    <div class="title">得民招聘网</div>
+    <div class="big">
       <div class="left">
-        123
+        <div class="ltop">
+          <span>招工信息</span>
+          <span>工人找活</span>
+        </div>
+        <div class="lbottom">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
-      <div class="right">
-        <h1>登录注册</h1>
-        <div class="rb">
-          <div>
-            <el-input placeholder="请输入手机号" class="mobile"></el-input>
-          </div>
-          <div class="yzcode">
+      <div class="mask">
+        <div class="right">
+          <h1>登录注册</h1>
+          <div class="rb">
             <div>
-              <el-input placeholder="请输入图片验证码" class="mobile">
-                <template slot="append">123456</template>
-              </el-input>
+              <el-input placeholder="请输入手机号" class="mobile"></el-input>
             </div>
-          </div>
-          <div class="yzcode">
+            <div class="yzcode">
+              <div>
+                <el-input placeholder="请输入图片验证码" class="mobile">
+                  <template slot="append">123456</template>
+                </el-input>
+              </div>
+            </div>
+            <div class="yzcode">
+              <div>
+                <el-input placeholder="请输入验证码" class="mobile">
+                  <template slot="append"><span class="getyzCode">获取验证码</span></template>
+                </el-input>
+              </div>
+            </div>
             <div>
-              <el-input placeholder="请输入验证码" class="mobile">
-                <template slot="append"><span class="getyzCode">获取验证码</span></template>
-              </el-input>
+              <input type="checkbox">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
+              <el-button type="primary" class="login">登录/注册</el-button>
             </div>
-          </div>
-          <div>
-            <input type="checkbox">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-            <el-button type="primary" class="login">登录/注册</el-button>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -98,21 +110,63 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
+.lbottom {
+  height: 96%;
+  background-color: #fff;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+.lbottom>div {
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.ltop {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ltop>span {
+  margin-top: 0;
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  background-color: skyblue;
+  color: #fff;
+  border: 1px solid #fff;
+  height: 30px;
+  line-height: 30px;
+}
+
+.big {
+  width: 100%;
+  /* height: 100%; */
+
+}
+
 .bigest {
   width: 100%;
   height: 100%;
   position: relative;
   background-color: #ccc;
   /* opacity: 0.8; */
+  text-align: center;
 }
 
 .mask {
   text-align: center;
-  width: 40%;
+  width: 30%;
   height: 70%;
-  position: fixed;
-  left: 30%;
-  top: 20%;
+  position: absolute;
+  right: 3%;
+  top: 10%;
   background-color: #fff;
   display: flex;
 }
@@ -122,14 +176,18 @@ export default {
 }
 
 .left {
-  width: 30%;
-  height: 100%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  width: 60%;
+  height: 70%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  /* border-radius: 10px; */
+  position: absolute;
+  top: 10%;
+  left: 5%;
 }
 
 .right {
-  width: 70%;
+  width: 50%;
   height: 100%;
   flex: 1;
 }
@@ -143,15 +201,23 @@ export default {
   justify-content: space-around;
 }
 
-.getyzCode,.getyzCode1{
+.getyzCode,
+.getyzCode1 {
   color: skyblue;
 }
-.getyzCode1{
-  font-weight:bolder;
+
+.getyzCode1 {
+  font-weight: bolder;
 }
-.login{
+
+.login {
   width: 80%;
   height: 60px;
   margin-top: 30px;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: bolder;
 }
 </style>
