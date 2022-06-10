@@ -12,14 +12,14 @@
           </div>
           <div class="yzcode">
             <div>
-              <el-input placeholder="请输入内容" class="mobile">
+              <el-input placeholder="请输入图片验证码" class="mobile">
                 <template slot="append">123456</template>
               </el-input>
             </div>
           </div>
           <div class="yzcode">
             <div>
-              <el-input placeholder="请输入内容" class="mobile">
+              <el-input placeholder="请输入验证码" class="mobile">
                 <template slot="append"><span class="getyzCode">获取验证码</span></template>
               </el-input>
             </div>
