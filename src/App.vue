@@ -4,10 +4,42 @@
     <div class="big">
       <div class="left">
         <div class="ltop">
-          <span v-for="(item, index) in this.titleData" :key="index" @click="changeTab(index)">{{ item }}</span>
+          <span @click="changeTab">招工信息</span>
+          <span @click="changeTab1">工人找活</span>
         </div>
         <div class="lbottom">
-          <div v-for="item in this.z">{{ item }}</div>
+          <div v-if="this.contentData">
+            <div v-for="item in this.contentData" class="content">
+              <div class="content-left">
+                <div class="ctitle">{{ item.title }}</div>
+                <div class="ccontent">{{ item.content }}</div>
+                <div class="cperson">联系人：{{ item.person }}</div>
+              </div>
+              <div class="row">
+                <div class="red">正在招</div>
+                <div class="ccontent">江苏南京</div>
+                <el-button type="primary">立即联系</el-button>
+              </div>
+            </div>
+          </div>
+          <div v-if="this.userData" class="">
+            <div v-for="item in this.userData" class="content1">
+              <div>
+                123
+              </div>
+              <div class="row">
+                <div>
+                  <div class="ctitle">{{ item.name }}</div>
+                  <div class="ccontent">{{ item.sex }}-{{ item.age }}岁-{{ item.nation }}族-工龄{{ item.seniority }}年</div>
+                </div>
+                <div class="cperson">{{ item.introduce }}</div>
+              </div>
+              <div class="row">
+                <div class="ccontent">江苏南京</div>
+                <el-button type="primary">立即联系</el-button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mask">
@@ -16,6 +48,9 @@
           <div class="rb">
             <div>
               <el-input placeholder="请输入手机号" class="mobile" v-model="mobile"></el-input>
+            </div>
+            <div>
+              <el-input placeholder="请输入姓名" class="mobile" v-model="name"></el-input>
             </div>
             <div class="yzcode">
               <div>
@@ -58,13 +93,11 @@ export default {
       mobile: '',
       yzm: '',
       sjyzm: '',
-      titleData: [],
-      textData: [],
-      Data: [],
-      x: [],
-      y: [],
-      z: [],
-      i: 0
+      name: '',
+      allData: [],
+      newAllData: [],
+      contentData: [],
+      userData: []
     }
   },
   computed: {
@@ -86,34 +119,47 @@ export default {
       );
     //请求数据图书馆的数据
     queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
-      console.log(res.data);
-      res.data[0].map(item => {
-        this.titleData.push(item.col_name)
-      })
-      res.data[1].map(item => {
-        this.textData.push(item)
-      })
-      this.all(this.textData)
-      this.z = this.y[0]
+      // console.log(res.data);
+      this.allData = this.translatePlatformDataToJsonArray(res)
+      this.contentData = this.translatePlatformDataToJsonArray(res)
     })
-
+    queryAssetById('95667b34-c650-4046-8be4-f75973b27697').then(res => {
+      // console.log(res.data);
+      this.newAllData = this.translatePlatformDataToJsonArray(res)
+      // this.userData = this.translatePlatformDataToJsonArray(res)
+    })
   },
   methods: {
     //处理数据
-    all(a) {
-      a[0].map((item, index) => {
-        a.map(ite => {
-          this.x.push(ite[index])
-        })
-        this.y.push(this.x.splice(a.length, a.length))
-      })
-      this.y[0] = this.x
-      this.z = this.y
-      console.log(this.y);
+    //  将平台返回数据转化为对象数组的形式 
+    translatePlatformDataToJsonArray(originTableData) {
+      let originTableHeader = originTableData.data[0];
+      let tableHeader = [];
+      originTableHeader.forEach((item) => {
+        tableHeader.push(item.col_name);
+      });
+      let tableBody = originTableData.data[1];
+      let tableData = [];
+      tableBody.forEach((tableItem) => {
+        let temp = {};
+        tableItem.forEach((item, index) => {
+          temp[tableHeader[index]] = item;
+        });
+        tableData.push(temp);
+      });
+      // console.log(tableData);
+      return tableData;
     },
     //tab切换
-    changeTab(e) {
-      this.z = this.y[e]
+    changeTab() {
+      this.userData = []
+      this.contentData = this.allData
+      // console.log(this.contentData);
+    },
+    changeTab1() {
+      this.contentData = []
+      this.userData = this.newAllData
+      // console.log(this.userData);
     },
     goToStudy() {
       window.open(this.customConfig?.url || "http://baidu.com");
@@ -154,16 +200,82 @@ export default {
   box-sizing: border-box;
 }
 
+.cneter {
+  display: flex;
+  justify-content: space-between;
+}
+
 .imgyzm {
   cursor: pointer;
 }
 
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.content-left {
+  height: 50%;
+  width: 70%;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.ctitle {
+  font-weight: bolder;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.ccontent {
+  font-size: 16px;
+  color: #c2c2c3;
+}
+
+.cperson {
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.content {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+}
+
+.red {
+  color: red;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.content1 {
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #000;
+}
+
 .lbottom {
   height: 93%;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
+  /* display: flex; */
+  /* flex-flow: column; */
+  /* justify-content: space-around; */
   background-color: #fff;
+  overflow: auto;
+
 }
 
 .lbottom>div {
@@ -211,7 +323,7 @@ export default {
    */
   background-color: #f2f2f2;
   /* opacity: 0.8; */
-  text-align: center;
+  /* text-align: center; */
 }
 
 .mask {
@@ -273,5 +385,6 @@ export default {
 .title {
   font-size: 50px;
   font-weight: bolder;
+  text-align: center;
 }
 </style>
