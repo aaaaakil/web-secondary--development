@@ -4,10 +4,10 @@
     <div class="big">
       <div class="left">
         <div class="ltop">
-          <span v-for="item in this.titleData" :key="item">{{ item }}</span>
+          <span v-for="(item, index) in this.titleData" :key="index" @click="changeTab(index)">{{ item }}</span>
         </div>
         <div class="lbottom">
-          <div v-for="item in this.Data">{{ item }}</div>
+          <div v-for="item in this.z">{{ item }}</div>
         </div>
       </div>
       <div class="mask">
@@ -61,7 +61,10 @@ export default {
       titleData: [],
       textData: [],
       Data: [],
-      x: []
+      x: [],
+      y: [],
+      z: [],
+      i: 0
     }
   },
   computed: {
@@ -81,6 +84,7 @@ export default {
         this,
         eventActionDefine
       );
+    //请求数据图书馆的数据
     queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
       console.log(res.data);
       res.data[0].map(item => {
@@ -89,10 +93,28 @@ export default {
       res.data[1].map(item => {
         this.textData.push(item)
       })
-      this.Data = this.textData.splice(0, 3)
+      this.all(this.textData)
+      this.z = this.y[0]
     })
+
   },
   methods: {
+    //处理数据
+    all(a) {
+      a[0].map((item, index) => {
+        a.map(ite => {
+          this.x.push(ite[index])
+        })
+        this.y.push(this.x.splice(a.length, a.length))
+      })
+      this.y[0] = this.x
+      this.z = this.y
+      console.log(this.y);
+    },
+    //tab切换
+    changeTab(e) {
+      this.z = this.y[e]
+    },
     goToStudy() {
       window.open(this.customConfig?.url || "http://baidu.com");
     },
@@ -142,12 +164,14 @@ export default {
   flex-flow: column;
   justify-content: space-around;
   background-color: #fff;
-
 }
 
 .lbottom>div {
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border-bottom: 1px solid #ccc;
+  font-size: 25px;
 }
 
 .ltop {
