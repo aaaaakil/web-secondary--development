@@ -4,13 +4,10 @@
     <div class="big">
       <div class="left">
         <div class="ltop">
-          <span>招工信息</span>
-          <span>工人找活</span>
+          <span v-for="item in this.titleData" :key="item">{{ item }}</span>
         </div>
         <div class="lbottom">
-          <div></div>
-          <div></div>
-          <div></div>
+          <div v-for="item in this.Data">{{ item }}</div>
         </div>
       </div>
       <div class="mask">
@@ -18,18 +15,18 @@
           <h1>登录注册</h1>
           <div class="rb">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile"></el-input>
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile"></el-input>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入图片验证码" class="mobile">
-                  <template slot="append">123456</template>
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm">
+                  <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
               </div>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入验证码" class="mobile">
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
               </div>
@@ -42,7 +39,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -50,11 +46,23 @@
 // import appService from "@njsdata/app-sdk";
 import eventActionDefine from "./components/msgCompConfig";
 import "./index.css";
+import { queryAssetById } from "./api/asset"
 export default {
   name: "App",
   props: {
     customConfig: Object,
     info: Object,
+  },
+  data() {
+    return {
+      mobile: '',
+      yzm: '',
+      sjyzm: '',
+      titleData: [],
+      textData: [],
+      Data: [],
+      x: []
+    }
   },
   computed: {
     title() {
@@ -73,6 +81,16 @@ export default {
         this,
         eventActionDefine
       );
+    queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
+      console.log(res.data);
+      res.data[0].map(item => {
+        this.titleData.push(item.col_name)
+      })
+      res.data[1].map(item => {
+        this.textData.push(item)
+      })
+      this.Data = this.textData.splice(0, 3)
+    })
   },
   methods: {
     goToStudy() {
@@ -114,12 +132,17 @@ export default {
   box-sizing: border-box;
 }
 
+.imgyzm {
+  cursor: pointer;
+}
+
 .lbottom {
-  height: 96%;
-  background-color: #fff;
+  height: 93%;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
+  background-color: #fff;
+
 }
 
 .lbottom>div {
@@ -128,9 +151,11 @@ export default {
 }
 
 .ltop {
-  width: 100%;
+  width: 25%;
+  height: 30px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .ltop>span {
@@ -138,11 +163,14 @@ export default {
   flex: 1;
   text-align: center;
   align-items: center;
-  background-color: skyblue;
+  background-color: #169bd4;
   color: #fff;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
   height: 30px;
   line-height: 30px;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 5px;
 }
 
 .big {
@@ -155,7 +183,9 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #ccc;
+  /* background-color: #ccc;
+   */
+  background-color: #f2f2f2;
   /* opacity: 0.8; */
   text-align: center;
 }
@@ -166,7 +196,7 @@ export default {
   height: 70%;
   position: absolute;
   right: 3%;
-  top: 10%;
+  top: 20%;
   background-color: #fff;
   display: flex;
 }
@@ -178,11 +208,10 @@ export default {
 .left {
   width: 60%;
   height: 70%;
-  border: 1px solid #fff;
-  background-color: #fff;
+  /* border: 1px solid #fff; */
   /* border-radius: 10px; */
   position: absolute;
-  top: 10%;
+  top: 20%;
   left: 5%;
 }
 
@@ -204,6 +233,7 @@ export default {
 .getyzCode,
 .getyzCode1 {
   color: skyblue;
+  cursor: pointer;
 }
 
 .getyzCode1 {

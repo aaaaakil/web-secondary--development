@@ -4,7 +4,7 @@
   "main": "app.9439dbc9.js",
   "version": "2",
   "props": {
-    "type": "customize",
+    "type": "login",
     "img": "APP_0001.png",
     "name": "应用二开_vue",
     "loadStyle": 0,
