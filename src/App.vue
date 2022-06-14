@@ -19,7 +19,9 @@
               <div class="row">
                 <div class="red1">正在招</div>
                 <div class="ccontent">江苏南京</div>
-                <div><el-button type="primary">立即联系</el-button></div>
+                <div>
+                  <el-button type="primary">立即联系</el-button>
+                </div>
               </div>
             </div>
           </div>
@@ -53,12 +55,13 @@
           </div>
           <div class="rb" v-show="count == 0">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck"></el-input>
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck" @input="mobileCheck">
+              </el-input>
               <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck">
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck" @input="yzmCheck">
                   <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
                 <div v-show="!this.flag2" class="red">*验证码格式有误</div>
@@ -66,7 +69,7 @@
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck">
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck" @input="sjyzmCheck">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
@@ -74,21 +77,23 @@
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login">登录/注册</el-button>
+              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录/注册</el-button>
             </div>
           </div>
           <div class="rb" v-show="count == 1">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile"></el-input>
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck" @input="mobileCheck">
+              </el-input>
               <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
             </div>
             <div>
-              <el-input placeholder="请输入姓名" class="mobile" v-model="name" @blur="nameCheck"></el-input>
+              <el-input placeholder="请输入姓名" class="mobile" v-model="name" @blur="nameCheck" @input="nameCheck">
+              </el-input>
               <div v-show="!this.flag4" class="red">*请输入正确的姓名</div>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm">
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck" @input="yzmCheck">
                   <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
               </div>
@@ -96,7 +101,7 @@
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm">
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck" @input="sjyzmCheck">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
@@ -104,7 +109,7 @@
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login">登录/注册</el-button>
+              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录/注册</el-button>
             </div>
           </div>
         </div>
@@ -165,10 +170,10 @@ export default {
       );
     //请求数据图书馆的数据
     queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
-      this.contentData = this.translatePlatformDataToJsonArray(res)
+      this.contentData = this.translatePlatformDataToJsonArray(res).splice(0,4)
     })
     queryAssetById('95667b34-c650-4046-8be4-f75973b27697').then(res => {
-      this.userData = this.translatePlatformDataToJsonArray(res)
+      this.userData = this.translatePlatformDataToJsonArray(res).splice(0,3)
     })
   },
   methods: {
@@ -196,11 +201,6 @@ export default {
     changeTab(i) {
       this.count1 = i
     },
-    changeTab1() {
-      this.contentData = []
-      this.userData = this.newAllData
-      // console.log(this.userData);
-    },
     //登录注册
     login() {
       console.log(1);
@@ -227,6 +227,10 @@ export default {
     },
     changel(i) {
       this.count = i
+      this.mobile = ''
+      this.yzm = ''
+      this.sjyzm = ''
+      this.name = ''
     },
     goToStudy() {
       window.open(this.customConfig?.url || "http://baidu.com");
@@ -279,10 +283,12 @@ export default {
 .r-first>div {
   cursor: pointer;
 }
-.red1{
+
+.red1 {
   color: red;
   font-size: 14px;
 }
+
 .cneter {
   display: flex;
   justify-content: space-between;
@@ -465,7 +471,7 @@ export default {
 
 .rb {
   width: 100%;
-  height: 60%;
+  height: 80%;
   margin-top: 100px;
   display: flex;
   flex-direction: column;
