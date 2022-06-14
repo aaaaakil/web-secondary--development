@@ -1,8 +1,9 @@
 {
-  "id": "6c2e4023-c9b6-4225-9c79-0b708bdd5748",
+  "id": "369f3cff-c13a-452b-9c62-e205f7845fc5",
   "type": "app",
-  "main": "app.40c699e8.js",
+  "main": "app.990bd73d.js",
   "version": "2",
+  "baseVersion": "V8R4C50SPC210_DM_0615",
   "props": {
     "type": "login",
     "img": "APP_0001.png",
