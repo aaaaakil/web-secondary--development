@@ -19,7 +19,7 @@
               <div class="row">
                 <div class="red1">正在招</div>
                 <div class="ccontent">江苏南京</div>
-                <el-button type="primary">立即联系</el-button>
+                <div><el-button type="primary">立即联系</el-button></div>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
               <div class="row">
-                <div style="font-size:16px">江苏南京</div>
+                <div style="font-size:16px;color:#7F7F7F">江苏南京</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -281,7 +281,7 @@ export default {
 }
 .red1{
   color: red;
-  font-size: 20px;
+  font-size: 14px;
 }
 .cneter {
   display: flex;
@@ -351,7 +351,6 @@ export default {
   font-size: 16px;
   color: #c2c2c3;
   margin: 10px 0;
-  flex: 1;
 }
 
 .cperson {
