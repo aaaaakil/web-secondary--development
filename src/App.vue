@@ -109,7 +109,7 @@
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login" :disabled="!flag">注册</el-button>
+              <el-button type="primary" class="login" @click="register" :disabled="!flag">注册</el-button>
             </div>
           </div>
         </div>
@@ -170,10 +170,10 @@ export default {
       );
     //请求数据图书馆的数据
     queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
-      this.contentData = this.translatePlatformDataToJsonArray(res).splice(0,4)
+      this.contentData = this.translatePlatformDataToJsonArray(res).splice(0, 4)
     })
     queryAssetById('95667b34-c650-4046-8be4-f75973b27697').then(res => {
-      this.userData = this.translatePlatformDataToJsonArray(res).splice(0,3)
+      this.userData = this.translatePlatformDataToJsonArray(res).splice(0, 3)
     })
   },
   methods: {
@@ -201,41 +201,52 @@ export default {
     changeTab(i) {
       this.count1 = i
     },
-    //登录注册
+    //登录
     login() {
-      console.log(1);
+      console.log('登录');
     },
+    //注册
+    register() {
+      console.log('注册');
+    },
+    //手机号码验证
     mobileCheck() {
       let mobile1 = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/
       this.flag1 = mobile1.test(this.mobile)
-      if(!this.mobile){
-        this.flag1=true
+      //如果用户点击之后没有输入  不显示必填校验
+      if (!this.mobile) {
+        this.flag1 = true
       }
     },
+    //图片验证码验证
     yzmCheck() {
       let yzm1 = /^[A-Za-z0-9]+$/
       this.flag2 = yzm1.test(this.yzm)
-      if(!this.yzm){
-        this.flag2=true
+      //如果用户点击之后没有输入  不显示必填校验
+      if (!this.yzm) {
+        this.flag2 = true
       }
     },
+    //短信验证码验证
     sjyzmCheck() {
       let sjyzm1 = /^\d+$/
       this.flag3 = sjyzm1.test(this.sjyzm)
-      if(!this.sjyzm){
-        this.flag3=true
+      //如果用户点击之后没有输入  不显示必填校验
+      if (!this.sjyzm) {
+        this.flag3 = true
       }
     },
+    //姓名验证
     nameCheck() {
       let name1 = /^(?:[\u4e00-\u9fa5·]{2,16})$/
       this.flag4 = name1.test(this.name)
-      if(!this.name){
-        this.flag4=true
+      //如果用户点击之后没有输入  不显示必填校验
+      if (!this.name) {
+        this.flag4 = true
       }
     },
     add() {
       this.flag = !this.flag
-      // console.log(this.flag);
     },
     changel(i) {
       this.count = i
