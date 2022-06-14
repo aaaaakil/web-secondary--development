@@ -55,13 +55,13 @@
           </div>
           <div class="rb" v-show="count == 0">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck" @input="mobileCheck">
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @input="mobileCheck">
               </el-input>
               <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck" @input="yzmCheck">
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @input="yzmCheck">
                   <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
                 <div v-show="!this.flag2" class="red">*验证码格式有误</div>
@@ -69,7 +69,7 @@
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck" @input="sjyzmCheck">
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @input="sjyzmCheck">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
@@ -82,18 +82,18 @@
           </div>
           <div class="rb" v-show="count == 1">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck" @input="mobileCheck">
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @input="mobileCheck">
               </el-input>
               <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
             </div>
             <div>
-              <el-input placeholder="请输入姓名" class="mobile" v-model="name" @blur="nameCheck" @input="nameCheck">
+              <el-input placeholder="请输入姓名" class="mobile" v-model="name" @input="nameCheck">
               </el-input>
               <div v-show="!this.flag4" class="red">*请输入正确的姓名</div>
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck" @input="yzmCheck">
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @input="yzmCheck">
                   <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
               </div>
@@ -101,7 +101,7 @@
             </div>
             <div class="yzcode">
               <div>
-                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck" @input="sjyzmCheck">
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @input="sjyzmCheck">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
                 <div v-show="!this.flag3" class="red">*验证码格式有误</div>
@@ -208,18 +208,30 @@ export default {
     mobileCheck() {
       let mobile1 = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/
       this.flag1 = mobile1.test(this.mobile)
+      if(!this.mobile){
+        this.flag1=true
+      }
     },
     yzmCheck() {
       let yzm1 = /^[A-Za-z0-9]+$/
       this.flag2 = yzm1.test(this.yzm)
+      if(!this.yzm){
+        this.flag2=true
+      }
     },
     sjyzmCheck() {
       let sjyzm1 = /^\d+$/
       this.flag3 = sjyzm1.test(this.sjyzm)
+      if(!this.sjyzm){
+        this.flag3=true
+      }
     },
     nameCheck() {
       let name1 = /^(?:[\u4e00-\u9fa5·]{2,16})$/
       this.flag4 = name1.test(this.name)
+      if(!this.name){
+        this.flag4=true
+      }
     },
     add() {
       this.flag = !this.flag
