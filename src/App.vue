@@ -4,11 +4,12 @@
     <div class="big">
       <div class="left">
         <div class="ltop">
-          <span @click="changeTab">招工信息</span>
-          <span @click="changeTab1">工人找活</span>
+          <span @click="changeTab(index)" v-for="(item, index) in tab" :class="(index == count1 ? 'active' : '')">{{
+              item
+          }}</span>
         </div>
         <div class="lbottom">
-          <div v-if="this.contentData">
+          <div v-if="this.count1 == 0">
             <div v-for="item in this.contentData" class="content">
               <div class="content-left">
                 <div class="ctitle">{{ item.title }}</div>
@@ -16,18 +17,18 @@
                 <div class="cperson">联系人：{{ item.person }}</div>
               </div>
               <div class="row">
-                <div class="red">正在招</div>
+                <div class="red1">正在招</div>
                 <div class="ccontent">江苏南京</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
           </div>
-          <div v-if="this.userData" class="">
+          <div v-if="this.count1 == 1">
             <div v-for="item in this.userData" class="content1">
               <div>
                 123
               </div>
-              <div class="row">
+              <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
                   <div class="ccontent">{{ item.sex }}-{{ item.age }}岁-{{ item.nation }}族-工龄{{ item.seniority }}年</div>
@@ -35,7 +36,7 @@
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
               <div class="row">
-                <div class="ccontent">江苏南京</div>
+                <div style="font-size:16px">江苏南京</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -44,13 +45,46 @@
       </div>
       <div class="mask">
         <div class="right">
-          <h1>登录注册</h1>
-          <div class="rb">
+          <div class="r-first">
+            <div v-for="(item, index) in change" :key="index" :class="(index == count ? 'active' : '')"
+              @click="changel(index)">
+              {{ item }}
+            </div>
+          </div>
+          <div class="rb" v-show="count == 0">
             <div>
-              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile"></el-input>
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile" @blur="mobileCheck"></el-input>
+              <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
+            </div>
+            <div class="yzcode">
+              <div>
+                <el-input placeholder="请输入图片验证码" class="mobile" v-model="yzm" @blur="yzmCheck">
+                  <template slot="append"><span class="imgyzm">123456</span></template>
+                </el-input>
+                <div v-show="!this.flag2" class="red">*验证码格式有误</div>
+              </div>
+            </div>
+            <div class="yzcode">
+              <div>
+                <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm" @blur="sjyzmCheck">
+                  <template slot="append"><span class="getyzCode">获取验证码</span></template>
+                </el-input>
+                <div v-show="!this.flag3" class="red">*验证码格式有误</div>
+              </div>
             </div>
             <div>
-              <el-input placeholder="请输入姓名" class="mobile" v-model="name"></el-input>
+              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
+              <el-button type="primary" class="login" @click="login">登录/注册</el-button>
+            </div>
+          </div>
+          <div class="rb" v-show="count == 1">
+            <div>
+              <el-input placeholder="请输入手机号" class="mobile" v-model="mobile"></el-input>
+              <div v-show="!this.flag1" class="red">*请输入正确的手机号码</div>
+            </div>
+            <div>
+              <el-input placeholder="请输入姓名" class="mobile" v-model="name" @blur="nameCheck"></el-input>
+              <div v-show="!this.flag4" class="red">*请输入正确的姓名</div>
             </div>
             <div class="yzcode">
               <div>
@@ -58,21 +92,26 @@
                   <template slot="append"><span class="imgyzm">123456</span></template>
                 </el-input>
               </div>
+              <div v-show="!this.flag2" class="red">*验证码格式有误</div>
             </div>
             <div class="yzcode">
               <div>
                 <el-input placeholder="请输入验证码" class="mobile" v-model="sjyzm">
                   <template slot="append"><span class="getyzCode">获取验证码</span></template>
                 </el-input>
+                <div v-show="!this.flag3" class="red">*验证码格式有误</div>
               </div>
             </div>
             <div>
-              <input type="checkbox">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login">登录/注册</el-button>
+              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
+              <el-button type="primary" class="login" @click="login">登录/注册</el-button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="skyblue">
+
     </div>
   </div>
 </template>
@@ -94,10 +133,17 @@ export default {
       yzm: '',
       sjyzm: '',
       name: '',
-      allData: [],
-      newAllData: [],
       contentData: [],
-      userData: []
+      userData: [],
+      flag: false,
+      flag1: true,
+      flag2: true,
+      flag3: true,
+      flag4: true,
+      change: ['登录', '注册'],
+      tab: ['招工信息', '工人找活'],
+      count: 0,
+      count1: 0
     }
   },
   computed: {
@@ -119,14 +165,10 @@ export default {
       );
     //请求数据图书馆的数据
     queryAssetById('29ba12cb-4b5f-4c0c-9564-4374fedba8cd').then(res => {
-      // console.log(res.data);
-      this.allData = this.translatePlatformDataToJsonArray(res)
       this.contentData = this.translatePlatformDataToJsonArray(res)
     })
     queryAssetById('95667b34-c650-4046-8be4-f75973b27697').then(res => {
-      // console.log(res.data);
-      this.newAllData = this.translatePlatformDataToJsonArray(res)
-      // this.userData = this.translatePlatformDataToJsonArray(res)
+      this.userData = this.translatePlatformDataToJsonArray(res)
     })
   },
   methods: {
@@ -151,15 +193,40 @@ export default {
       return tableData;
     },
     //tab切换
-    changeTab() {
-      this.userData = []
-      this.contentData = this.allData
-      // console.log(this.contentData);
+    changeTab(i) {
+      this.count1 = i
     },
     changeTab1() {
       this.contentData = []
       this.userData = this.newAllData
       // console.log(this.userData);
+    },
+    //登录注册
+    login() {
+      console.log(1);
+    },
+    mobileCheck() {
+      let mobile1 = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/
+      this.flag1 = mobile1.test(this.mobile)
+    },
+    yzmCheck() {
+      let yzm1 = /^[A-Za-z0-9]+$/
+      this.flag2 = yzm1.test(this.yzm)
+    },
+    sjyzmCheck() {
+      let sjyzm1 = /^\d+$/
+      this.flag3 = sjyzm1.test(this.sjyzm)
+    },
+    nameCheck() {
+      let name1 = /^(?:[\u4e00-\u9fa5·]{2,16})$/
+      this.flag4 = name1.test(this.name)
+    },
+    add() {
+      this.flag = !this.flag
+      // console.log(this.flag);
+    },
+    changel(i) {
+      this.count = i
     },
     goToStudy() {
       window.open(this.customConfig?.url || "http://baidu.com");
@@ -200,16 +267,59 @@ export default {
   box-sizing: border-box;
 }
 
+.r-first {
+  width: 40%;
+  height: 20px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 30px;
+  color: #7F7F7F;
+}
+
+.r-first>div {
+  cursor: pointer;
+}
+.red1{
+  color: red;
+  font-size: 20px;
+}
 .cneter {
   display: flex;
   justify-content: space-between;
+}
+
+.skyblue {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background-color: #4D9CFB;
+  opacity: 0.9;
 }
 
 .imgyzm {
   cursor: pointer;
 }
 
+.big {
+  width: 80%;
+  position: relative;
+  margin: 0 auto;
+  height: 80%;
+  margin-top: 80px;
+  box-shadow: 10px 10px 10px 10px #f2f2f2;
+  background-color: #fff;
+}
+
 .row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.row1 {
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -231,20 +341,29 @@ export default {
   font-size: 16px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   margin-top: 15px;
+  flex: 1;
 }
 
 .ccontent {
   font-size: 16px;
   color: #c2c2c3;
+  margin: 10px 0;
+  flex: 1;
 }
 
 .cperson {
+  width: 70%;
   margin: 10px 0;
   font-size: 16px;
-  font-weight: bolder;
+  color: #c2c2c3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
 }
 
 .content {
@@ -252,27 +371,24 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #000;
+  border-top: 1px solid #f2f2f2;
 }
 
 .red {
   color: red;
-  font-weight: bolder;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .content1 {
   height: 200px;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid #000;
+  justify-content: space-between;
+  border-top: 1px solid #f2f2f2;
 }
 
 .lbottom {
   height: 93%;
-  /* display: flex; */
-  /* flex-flow: column; */
-  /* justify-content: space-around; */
   background-color: #fff;
   overflow: auto;
 
@@ -295,25 +411,16 @@ export default {
 }
 
 .ltop>span {
-  margin-top: 0;
   flex: 1;
   text-align: center;
   align-items: center;
-  background-color: #169bd4;
-  color: #fff;
-  /* border: 1px solid #fff; */
   height: 30px;
   line-height: 30px;
   cursor: pointer;
   margin-right: 20px;
-  border-radius: 5px;
+  font-size: 20px;
 }
 
-.big {
-  width: 100%;
-  /* height: 100%; */
-
-}
 
 .bigest {
   width: 100%;
@@ -321,7 +428,7 @@ export default {
   position: relative;
   /* background-color: #ccc;
    */
-  background-color: #f2f2f2;
+  background-color: #fff;
   /* opacity: 0.8; */
   /* text-align: center; */
 }
@@ -332,7 +439,7 @@ export default {
   height: 70%;
   position: absolute;
   right: 3%;
-  top: 20%;
+  top: 5%;
   background-color: #fff;
   display: flex;
 }
@@ -347,7 +454,7 @@ export default {
   /* border: 1px solid #fff; */
   /* border-radius: 10px; */
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: 5%;
 }
 
@@ -383,8 +490,16 @@ export default {
 }
 
 .title {
-  font-size: 50px;
+  padding-left: 240px;
+  font-size: 30px;
+  height: 80px;
+  line-height: 80px;
+  color: #4D9CFB;
   font-weight: bolder;
-  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.active {
+  color: #4D9CFB;
 }
 </style>
