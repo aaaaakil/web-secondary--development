@@ -77,7 +77,7 @@
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录/注册</el-button>
+              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录</el-button>
             </div>
           </div>
           <div class="rb" v-show="count == 1">
@@ -109,7 +109,7 @@
             </div>
             <div>
               <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
-              <el-button type="primary" class="login" @click="login" :disabled="!flag">登录/注册</el-button>
+              <el-button type="primary" class="login" @click="login" :disabled="!flag">注册</el-button>
             </div>
           </div>
         </div>
