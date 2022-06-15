@@ -25,13 +25,14 @@
           </div>
           <div v-if="this.count1 == 1">
             <div v-for="item in this.userData" class="content1">
-              <div>
-                123
+              <div class="userImg1">
+                <img :src="item.imgUrl" alt="" class="userImg">
               </div>
               <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }}-{{ item.age }}岁-{{ item.nation }}族-工龄{{ item.seniority }}年</div>
+                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年</div>
+                  <div class="lol">{{item.skills}}</div>
                 </div>
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
@@ -191,6 +192,8 @@ export default {
         nation: "nation1",
         seniority: "seniority1",
         introduce: "introduce1",
+        imgUrl: "imgUrl1",
+        skills:"skills1"
       }
     ]
     //userConfig.xxx  资产id  
@@ -213,6 +216,8 @@ export default {
         item.nation = item[userConfig[1].nation]
         item.seniority = item[userConfig[1].seniority]
         item.introduce = item[userConfig[1].introduce]
+        item.imgUrl = item[userConfig[1].imgUrl]
+        item.skills = item[userConfig[1].skills]
         this.userData.push(item)
       })
     })
@@ -270,7 +275,7 @@ export default {
         if (res.status == 200) {
           alert('登录成功')
         }
-        if(res.status == 500){
+        if (res.status == 500) {
           alert('该手机号未注册')
         }
       })
@@ -287,6 +292,16 @@ export default {
     //更改图片验证码
     changePicyzm() {
       GetpicYzm().then(response => {
+        const url =
+          'data:image/png;base64,' +
+          btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+
+        this.captchaUrl = url
       })
         .catch(error => {
           // debugger
@@ -391,6 +406,29 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.lol {
+  width: 30%;
+  font-size: 14px;
+  background-color: rgba(245, 246, 250);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #7F7F7F;
+  text-align: center;
+}
+
+.userImg {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.userImg1 {
+  height: 100%;
+  line-height: 200px;
 }
 
 html,
@@ -510,7 +548,7 @@ body {
   height: 90%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-top: 1px solid #f2f2f2;
 }
 
@@ -523,7 +561,7 @@ body {
   height: 200px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-top: 1px solid #f2f2f2;
 }
 
