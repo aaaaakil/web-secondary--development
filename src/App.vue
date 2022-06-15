@@ -1,6 +1,16 @@
 <template>
   <div class="bigest">
-    <div class="title">得民招聘网</div>
+
+    <div class="title">
+      <div class="top">
+        <div style="height:100%;width:60px">
+          <img src="../output/images/1c4c7d184fa9d98a46fd36d187204c3.png" alt="" class="icon" />
+        </div>
+        <div>
+          得民招聘网
+        </div>
+      </div>
+    </div>
     <div class="big">
       <div class="left">
         <div class="ltop">
@@ -31,8 +41,9 @@
               <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年</div>
-                  <div class="lol">{{item.skills}}</div>
+                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年
+                  </div>
+                  <div class="lol">{{ item.skills }}</div>
                 </div>
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
@@ -176,26 +187,28 @@ export default {
         this,
         eventActionDefine
       );
-    // let userConfig=JSON.parse(window.configuration.secondary_develop_login.current_value)
-    let userConfig = [
-      {
-        asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
-        title: "name1",
-        content: "content1",
-        person: "person1"
-      },
-      {
-        asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
-        name: "title1",
-        sex: "sex1",
-        age: "age1",
-        nation: "nation1",
-        seniority: "seniority1",
-        introduce: "introduce1",
-        imgUrl: "imgUrl1",
-        skills:"skills1"
-      }
-    ]
+    let userConfig=JSON.parse(window.configuration.secondary_develop_login.current_value)
+    // let userConfig = [
+    //   //招工
+    //   {
+    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+    //     title: "name1",
+    //     content: "content1",
+    //     person: "person1"
+    //   },
+    //   //找活
+    //   {
+    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+    //     name: "title1",
+    //     sex: "sex1",
+    //     age: "age1",
+    //     nation: "nation1",
+    //     seniority: "seniority1",
+    //     introduce: "introduce1",
+    //     imgUrl: "imgUrl1",
+    //     skills: "skills1"
+    //   }
+    // ]
     //userConfig.xxx  资产id  
     //请求数据图书馆的数据
     queryAssetById(userConfig[0].asset_id).then(res => {
@@ -206,6 +219,9 @@ export default {
         item.person = item[userConfig[0].person]
         this.contentData.push(item)
       })
+      if (this.contentData.length > 10) {
+        this.contentData = this.contentData.splice(0, 10)
+      }
     })
     queryAssetById(userConfig[1].asset_id).then(res => {
       let userData = this.translatePlatformDataToJsonArray(res)
@@ -220,6 +236,9 @@ export default {
         item.skills = item[userConfig[1].skills]
         this.userData.push(item)
       })
+      if (this.userData.length > 10) {
+        this.userData = this.userData.splice(0, 10)
+      }
     })
     // console.log(this.customConfig.data[0][0].title);
 
@@ -408,6 +427,26 @@ export default {
   padding: 0;
 }
 
+.top {
+  display: flex;
+  justify-content: space-around;
+  width: 25%;
+  padding-left: 200px;
+  height: 100px;
+  /* line-height: 100px; */
+  color: #4D9CFB;
+  font-weight: bolder;
+  /* vertical-align: text-bottom; */
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  line-height: 100px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
 .lol {
   width: 30%;
   font-size: 14px;
@@ -464,6 +503,10 @@ body {
 .cneter {
   display: flex;
   justify-content: space-between;
+}
+
+.lefttop {
+  width: 40%;
 }
 
 .skyblue {
@@ -572,6 +615,10 @@ body {
 
 }
 
+.lbottom::-webkit-scrollbar {
+  width: 0;
+}
+
 .lbottom>div {
   flex: 1;
   overflow: hidden;
@@ -667,13 +714,16 @@ body {
 }
 
 .title {
-  padding-left: 240px;
+  width: 100%;
+  /* padding-left: 240px; */
   font-size: 30px;
-  height: 80px;
-  line-height: 80px;
+  height: 100px;
+  line-height: 100px;
   color: #4D9CFB;
   font-weight: bolder;
   border-bottom: 1px solid #ccc;
+  /* display: flex;
+  justify-content: space-around; */
 }
 
 .active {
