@@ -175,7 +175,7 @@ export default {
       count123: 0,
       captchaUrl: '',
       showPrivacy: false,
-      showServe:false
+      showServe: false
     }
   },
   computed: {
@@ -205,28 +205,28 @@ export default {
         this,
         eventActionDefine
       );
-    // let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
-    let userConfig = [
-      //招工
-      {
-        asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
-        title: "name1",
-        content: "content1",
-        person: "person1"
-      },
-      //找活
-      {
-        asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
-        name: "title1",
-        sex: "sex1",
-        age: "age1",
-        nation: "nation1",
-        seniority: "seniority1",
-        introduce: "introduce1",
-        imgUrl: "imgUrl1",
-        skills: "skills1"
-      }
-    ]
+    let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
+    // let userConfig = [
+    //   //招工
+    //   {
+    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+    //     title: "name1",
+    //     content: "content1",
+    //     person: "person1"
+    //   },
+    //   //找活
+    //   {
+    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+    //     name: "title1",
+    //     sex: "sex1",
+    //     age: "age1",
+    //     nation: "nation1",
+    //     seniority: "seniority1",
+    //     introduce: "introduce1",
+    //     imgUrl: "imgUrl1",
+    //     skills: "skills1"
+    //   }
+    // ]
     //userConfig.xxx  资产id  
     //请求数据图书馆的数据
     queryAssetById(userConfig[0].asset_id).then(res => {
@@ -267,10 +267,10 @@ export default {
     appear() {
       this.showPrivacy = true
     },
-    appear1(){
+    appear1() {
       this.showServe = true
     },
-    disappear1(){
+    disappear1() {
       this.showServe = false
     },
     //获取图片验证码
