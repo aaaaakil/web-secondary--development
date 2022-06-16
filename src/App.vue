@@ -1,6 +1,5 @@
 <template>
   <div class="bigest">
-
     <div class="title">
       <div class="top">
         <div style="height:100%;width:60px">
@@ -136,7 +135,7 @@
 import eventActionDefine from "./components/msgCompConfig";
 import "element-ui/lib/theme-chalk/index.css"
 import "./index.css";
-import { queryAssetById, Phoneyzm, GetpicYzm, register, Login } from "./api/asset"
+import { queryAssetById } from "./api/asset"
 export default {
   name: "App",
   props: {
