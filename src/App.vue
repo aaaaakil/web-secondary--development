@@ -187,28 +187,28 @@ export default {
         this,
         eventActionDefine
       );
-    // let userConfig=JSON.parse(window.configuration.secondary_develop_login.current_value)
-    let userConfig = [
-      //招工
-      {
-        asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
-        title: "name1",
-        content: "content1",
-        person: "person1"
-      },
-      //找活
-      {
-        asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
-        name: "title1",
-        sex: "sex1",
-        age: "age1",
-        nation: "nation1",
-        seniority: "seniority1",
-        introduce: "introduce1",
-        imgUrl: "imgUrl1",
-        skills: "skills1"
-      }
-    ]
+    let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
+    // let userConfig = [
+    //   //招工
+    //   {
+    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+    //     title: "name1",
+    //     content: "content1",
+    //     person: "person1"
+    //   },
+    //   //找活
+    //   {
+    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+    //     name: "title1",
+    //     sex: "sex1",
+    //     age: "age1",
+    //     nation: "nation1",
+    //     seniority: "seniority1",
+    //     introduce: "introduce1",
+    //     imgUrl: "imgUrl1",
+    //     skills: "skills1"
+    //   }
+    // ]
     //userConfig.xxx  资产id  
     //请求数据图书馆的数据
     queryAssetById(userConfig[0].asset_id).then(res => {
@@ -244,12 +244,12 @@ export default {
 
   },
   methods: {
+    //获取图片验证码
     getYanzhengImg() {
       console.log(123);
       GetpicYzm().then(() => {
         this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
       })
-
     },
     //处理数据
     //  将平台返回数据转化为对象数组的形式 
@@ -432,8 +432,8 @@ export default {
   height: 20%;
 } */
 button {
-  appearance: auto; 
-  writing-mode: horizontal-tb !important; 
+  appearance: auto;
+  writing-mode: horizontal-tb !important;
   text-rendering: auto;
   color: -internal-light-dark(black, white);
   letter-spacing: normal;
