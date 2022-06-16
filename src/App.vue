@@ -85,7 +85,8 @@
               </div>
             </div>
             <div>
-              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
+              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1"> <span
+                  @click="appear">《隐私政策》</span> <span @click="appear1">《服务协议》</span></span>
               <el-button type="primary" class="login" @click="login1" :disabled="!flag">登录</el-button>
             </div>
           </div>
@@ -121,6 +122,18 @@
               <el-button type="primary" class="login" @click="register1" :disabled="!flag">注册</el-button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="privacy" v-show="showPrivacy">
+        <span class="close" @click="disappear">X</span>
+        <div class="privacy1">
+
+        </div>
+      </div>
+      <div class="privacy" v-show="showServe">
+        <span class="close" @click="disappear1">X</span>
+        <div class="privacy1">
+
         </div>
       </div>
     </div>
@@ -160,7 +173,9 @@ export default {
       count: 0,
       count1: 0,
       count123: 0,
-      captchaUrl: ''
+      captchaUrl: '',
+      showPrivacy: false,
+      showServe:false
     }
   },
   computed: {
@@ -172,10 +187,10 @@ export default {
     },
   },
   mounted() {
-    if(this.$refs.biggest.parentNode.parentNode){
-      this.$refs.biggest.parentNode.parentNode.style.height='100%'
+    if (this.$refs.biggest.parentNode.parentNode) {
+      this.$refs.biggest.parentNode.parentNode.style.height = '100%'
     }
-    
+
     this.changePicyzm()
     // this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
     // GetpicYzm().then(() => {
@@ -190,28 +205,28 @@ export default {
         this,
         eventActionDefine
       );
-    let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
-    // let userConfig = [
-    //   //招工
-    //   {
-    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
-    //     title: "name1",
-    //     content: "content1",
-    //     person: "person1"
-    //   },
-    //   //找活
-    //   {
-    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
-    //     name: "title1",
-    //     sex: "sex1",
-    //     age: "age1",
-    //     nation: "nation1",
-    //     seniority: "seniority1",
-    //     introduce: "introduce1",
-    //     imgUrl: "imgUrl1",
-    //     skills: "skills1"
-    //   }
-    // ]
+    // let userConfig = JSON.parse(window.configuration.secondary_develop_login.current_value)
+    let userConfig = [
+      //招工
+      {
+        asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+        title: "name1",
+        content: "content1",
+        person: "person1"
+      },
+      //找活
+      {
+        asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+        name: "title1",
+        sex: "sex1",
+        age: "age1",
+        nation: "nation1",
+        seniority: "seniority1",
+        introduce: "introduce1",
+        imgUrl: "imgUrl1",
+        skills: "skills1"
+      }
+    ]
     //userConfig.xxx  资产id  
     //请求数据图书馆的数据
     queryAssetById(userConfig[0].asset_id).then(res => {
@@ -246,6 +261,18 @@ export default {
     // console.log(this.customConfig.data[0][0].title);
   },
   methods: {
+    disappear() {
+      this.showPrivacy = false
+    },
+    appear() {
+      this.showPrivacy = true
+    },
+    appear1(){
+      this.showServe = true
+    },
+    disappear1(){
+      this.showServe = false
+    },
     //获取图片验证码
     getYanzhengImg() {
       console.log(123);
@@ -427,6 +454,36 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.privacy {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  z-index: 999999999;
+  background-color: #000;
+  opacity: 0.8;
+}
+
+.privacy1 {
+  position: absolute;
+  top: 20px;
+  left: 30%;
+  width: 500px;
+  height: 600px;
+  border: 1px solid red;
 }
 
 /* .el-button{
@@ -674,7 +731,7 @@ body {
 
 .bigest {
   width: 100%;
-  height: 1007px;
+  height: 100%;
   position: relative;
   /* background-color: #ccc;
    */
