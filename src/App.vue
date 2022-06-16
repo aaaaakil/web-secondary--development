@@ -187,28 +187,28 @@ export default {
         this,
         eventActionDefine
       );
-    let userConfig=JSON.parse(window.configuration.secondary_develop_login.current_value)
-    // let userConfig = [
-    //   //招工
-    //   {
-    //     asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
-    //     title: "name1",
-    //     content: "content1",
-    //     person: "person1"
-    //   },
-    //   //找活
-    //   {
-    //     asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
-    //     name: "title1",
-    //     sex: "sex1",
-    //     age: "age1",
-    //     nation: "nation1",
-    //     seniority: "seniority1",
-    //     introduce: "introduce1",
-    //     imgUrl: "imgUrl1",
-    //     skills: "skills1"
-    //   }
-    // ]
+    // let userConfig=JSON.parse(window.configuration.secondary_develop_login.current_value)
+    let userConfig = [
+      //招工
+      {
+        asset_id: "8bf91192-0cc0-4be9-a5c3-535cea758ad5",
+        title: "name1",
+        content: "content1",
+        person: "person1"
+      },
+      //找活
+      {
+        asset_id: "fe91018f-66b9-494f-9da7-3858443111f9",
+        name: "title1",
+        sex: "sex1",
+        age: "age1",
+        nation: "nation1",
+        seniority: "seniority1",
+        introduce: "introduce1",
+        imgUrl: "imgUrl1",
+        skills: "skills1"
+      }
+    ]
     //userConfig.xxx  资产id  
     //请求数据图书馆的数据
     queryAssetById(userConfig[0].asset_id).then(res => {
@@ -427,6 +427,33 @@ export default {
   padding: 0;
 }
 
+/* .el-button{
+  width: 100%;
+  height: 20%;
+} */
+button {
+  appearance: auto; 
+  writing-mode: horizontal-tb !important; 
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  margin: 0em;
+  padding: 1px 6px;
+  cursor: pointer;
+  height: 26px;
+}
+
 .top {
   display: flex;
   justify-content: space-around;
@@ -534,7 +561,7 @@ body {
 }
 
 .row {
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
