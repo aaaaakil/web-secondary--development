@@ -1,7 +1,11 @@
 {
   "id": "a2e8cc5c-c0a8-43a9-a387-68139e0bab2d",
   "type": "app",
+<<<<<<< HEAD
   "main": "app.58a2c629.js",
+=======
+  "main": "app.9f3005df.js",
+>>>>>>> d844f873d2afca40fc15ef109eec03c300d6a83a
   "version": "2",
   "baseVersion": "V8R4C50SPC210_DM_0615",
   "props": {
