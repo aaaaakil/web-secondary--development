@@ -118,7 +118,8 @@
               </div>
             </div>
             <div>
-              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1">《隐私政策》《服务协议》</span>
+              <input type="checkbox" :checked="flag" @click="add">已阅读并同意<span class="getyzCode1"> <span
+                  @click="appear">《隐私政策》</span> <span @click="appear1">《服务协议》</span></span>
               <el-button type="primary" class="login" @click="register1" :disabled="!flag">注册</el-button>
             </div>
           </div>
@@ -127,7 +128,7 @@
       <div class="privacy" v-show="showPrivacy">
         <span class="close" @click="disappear">X</span>
         <div class="privacy1">
-
+          12312312312313213213213213213213213213213215456546546541654654651231324895416234568541230549657895641223486514565646584651651951985165165165165165165161231564165
         </div>
       </div>
       <div class="privacy" v-show="showServe">
@@ -308,9 +309,6 @@ export default {
     register1() {
       register(this.sjyzm, this.name, this.mobile).then(res => {
         // console.log(res);
-        if (res.status == 500) {
-          alert("该手机号已经注册")
-        }
         if (res.status == 200) {
           alert("注册成功")
         }
@@ -478,12 +476,22 @@ export default {
 }
 
 .privacy1 {
+  /* text-align: center; */
   position: absolute;
   top: 20px;
-  left: 30%;
+  left: 35%;
   width: 500px;
   height: 600px;
-  border: 1px solid red;
+  background-color: #fff;
+  /* padding-top: 40px; */
+  text-indent: 20px;
+  word-wrap: break-word;
+  overflow: auto;
+  border-radius: 15px;
+}
+
+.privacy1::-webkit-scrollbar {
+  width: 0;
 }
 
 /* .el-button{
