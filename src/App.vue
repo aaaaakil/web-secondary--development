@@ -27,7 +27,7 @@
               </div>
               <div class="row">
                 <div class="red1">正在招</div>
-                <div class="ccontent">江苏南京</div>
+                <div class="ccontent">{{item.position}}}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
               <div class="row">
-                <div style="font-size:16px;color:#7F7F7F">江苏南京</div>
+                <div style="font-size:16px;color:#7F7F7F">{{item.position}}}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -191,13 +191,7 @@ export default {
     if (this.$refs.biggest.parentNode.parentNode) {
       this.$refs.biggest.parentNode.parentNode.style.height = '100%'
     }
-
     this.changePicyzm()
-    // this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
-    // GetpicYzm().then(() => {
-    //   this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
-    // })
-    // this.getYanzhengImg()
     let { componentId } = this.customConfig || {};
     componentId &&
       window.componentCenter?.register(
@@ -236,6 +230,7 @@ export default {
         item.title = item[userConfig[0].title]
         item.content = item[userConfig[0].content]
         item.person = item[userConfig[0].person]
+        item.position = item[userConfig[0].position]
         this.contentData.push(item)
       })
       if (this.contentData.length > 10) {
@@ -253,6 +248,7 @@ export default {
         item.introduce = item[userConfig[1].introduce]
         item.imgUrl = item[userConfig[1].imgUrl]
         item.skills = item[userConfig[1].skills]
+        item.position = item[userConfig[1].position]
         this.userData.push(item)
       })
       if (this.userData.length > 10) {
@@ -274,13 +270,6 @@ export default {
     disappear1() {
       this.showServe = false
     },
-    //获取图片验证码
-    getYanzhengImg() {
-      console.log(123);
-      GetpicYzm().then(() => {
-        this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
-      })
-    },
     //处理数据
     //  将平台返回数据转化为对象数组的形式 
     translatePlatformDataToJsonArray(originTableData) {
@@ -298,7 +287,6 @@ export default {
         });
         tableData.push(temp);
       });
-      // console.log(tableData);
       return tableData;
     },
     //tab切换
@@ -308,7 +296,6 @@ export default {
     //注册
     register1() {
       register(this.sjyzm, this.name, this.mobile).then(res => {
-        // console.log(res);
         if (res.status == 200) {
           alert("注册成功")
         }
@@ -320,9 +307,6 @@ export default {
         // console.log(res);
         if (res.status == 200) {
           alert('登录成功')
-        }
-        if (res.status == 500) {
-          alert('该手机号未注册')
         }
       })
     },
@@ -346,7 +330,6 @@ export default {
               ''
             )
           );
-
         this.captchaUrl = url
       })
         .catch(error => {
@@ -360,12 +343,8 @@ export default {
                 ''
               )
             );
-
           this.captchaUrl = url
         });
-      // GetpicYzm().then(() => {
-      //   this.captchaUrl = 'http://10.15.111.11:18080/sdata/rest/system/authority/getAuthPic?module=123141241221'
-      // })
     },
     //图片验证码验证
     yzmCheck() {
@@ -380,8 +359,12 @@ export default {
     GetPhoneyzm() {
       Phoneyzm(this.yzm, String(this.mobile)).then(res => {
         // console.log(res);
-        if (res.status == 500) {
-          alert('短信发送间隔必须大于一分钟')
+        setInterval(() => {
+          this.changePicyzm()
+        }, 60000)
+      }).catch(rej => {
+        if (rej.status != 200) {
+          alert('请检查图片验证码或等待一分钟后再试')
         }
       })
     },
@@ -469,21 +452,18 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  /* border: 1px solid red; */
   z-index: 999999999;
   background-color: #000;
   opacity: 0.8;
 }
 
 .privacy1 {
-  /* text-align: center; */
   position: absolute;
   top: 20px;
   left: 35%;
   width: 500px;
   height: 600px;
   background-color: #fff;
-  /* padding-top: 40px; */
   text-indent: 20px;
   word-wrap: break-word;
   overflow: auto;
@@ -493,11 +473,6 @@ export default {
 .privacy1::-webkit-scrollbar {
   width: 0;
 }
-
-/* .el-button{
-  width: 100%;
-  height: 20%;
-} */
 button {
   appearance: auto;
   writing-mode: horizontal-tb !important;
@@ -527,17 +502,14 @@ button {
   width: 25%;
   padding-left: 200px;
   height: 100px;
-  /* line-height: 100px; */
   color: #4D9CFB;
   font-weight: bolder;
-  /* vertical-align: text-bottom; */
 }
 
 .icon {
   width: 60px;
   height: 60px;
   line-height: 100px;
-  /* margin-top: 20px; */
   margin-right: 20px;
 }
 
@@ -561,7 +533,7 @@ button {
 
 .userImg1 {
   height: 100%;
-  line-height: 200px;
+  line-height: 100px;
 }
 
 html,
@@ -625,7 +597,6 @@ body {
 }
 
 .row {
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -664,6 +635,8 @@ body {
   font-size: 16px;
   color: #c2c2c3;
   margin: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cperson {
@@ -741,11 +714,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  /* background-color: #ccc;
-   */
   background-color: #fff;
-  /* opacity: 0.8; */
-  /* text-align: center; */
 }
 
 .mask {
@@ -766,8 +735,6 @@ body {
 .left {
   width: 60%;
   height: 70%;
-  /* border: 1px solid #fff; */
-  /* border-radius: 10px; */
   position: absolute;
   top: 5%;
   left: 5%;
@@ -806,15 +773,12 @@ body {
 
 .title {
   width: 100%;
-  /* padding-left: 240px; */
   font-size: 30px;
   height: 100px;
   line-height: 100px;
   color: #4D9CFB;
   font-weight: bolder;
   border-bottom: 1px solid #ccc;
-  /* display: flex;
-  justify-content: space-around; */
 }
 
 .active {
