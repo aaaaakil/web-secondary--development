@@ -607,7 +607,8 @@ export default {
       captchaUrl: '',
       showPrivacy: false,
       showServe: false,
-      url: 'http://www.baidu.com'
+      url: 'http://www.baidu.com',
+      url1: 'http://www.baidu.com'
     }
   },
   computed: {
@@ -653,7 +654,8 @@ export default {
     //     skills: "skills1"
     //   },
     //   {
-    //      url:"url"
+    //      loginUrl:"url",
+    //      registerUrl:"url"
     //   }
     // ]
     //userConfig.xxx  资产id  
@@ -689,7 +691,8 @@ export default {
         this.userData = this.userData.splice(0, 10)
       }
     })
-    this.url = userConfig[2].url
+    this.url = userConfig[2].loginUrl
+    this.url1 = userConfig[2].registerUrl
     // console.log(this.customConfig.data[0][0].title);
   },
   methods: {
@@ -732,7 +735,10 @@ export default {
     register1() {
       register(this.sjyzm, this.name, this.mobile).then(res => {
         if (res.status == 200) {
-          alert("注册成功")
+          alert('注册成功')
+          if (this.url1) {
+            window.open(`${this.url1}`, "_blank");
+          }
         }
       })
     },
@@ -740,9 +746,11 @@ export default {
     login1() {
       Login(this.sjyzm, this.mobile).then(res => {
         // console.log(res);
-
         if (res.status == 200) {
-          window.open(`${this.url}`, "_blank");
+          alert('登录成功')
+          if (this.url) {
+            window.open(`${this.url}`, "_blank");
+          }
         }
       })
     },
