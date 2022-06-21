@@ -1,8 +1,9 @@
 {
-  "id": "a2e8cc5c-c0a8-43a9-a387-68139e0bab2d",
+  "id": "abe2b1fb-bf90-45bd-87f7-d6b57a84f031",
   "type": "app",
-  "main": "app.728e0a93.js",
+  "main": "app.2547cea4.js",
   "version": "2",
+  "baseVersion": "V8R4C50SPC210_DM_0615",
   "props": {
     "type": "login",
     "img": "custom_table.png",
