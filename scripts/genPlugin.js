@@ -57,13 +57,9 @@ glob.sync(path.resolve(__dirname, "../build/static/media/*")).map((file) => {
 
 console.log("新文件拷贝完成");
 
-configJson.main = mainFileName;
+let configJson = require("../pluginTemp/config.json");
 
-fs.writeFileSync(
-  path.resolve(__dirname, "../pluginTemp/config.json"),
-  JSON.stringify(configJson, null, 2),
-  "utf8"
-);
+configJson.main = mainFileName;
 
 console.log("config.json 修改完成", configJson);
 
