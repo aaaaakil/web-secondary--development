@@ -22,7 +22,9 @@
       "titleText",
       "titlePosition",
       "xAxisFontSize",
-      "xAxisFontFamily"
+      "xAxisFontFamily",
+      "numberFontSize",
+      "numberFontFamily"
     ],
     "optionModules": []
   }
