@@ -1,25 +1,9 @@
 <template>
-  <div
-    className="analyzer-vue-demo"
-    :style="{
-      width: '100%',
-      height: '100%',
-      fontSize: options.externalVariables.fontSize || '14px',
-    }"
-  >
-    <div v-if="dataSource && tableDataHeader && tableData">
-      <div className="card-bg" @click="clickBt">点这里测试逻辑控制</div>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column
-          v-for="(item, index) in tableDataHeader"
-          :key="index"
-          :prop="item.prop"
-          :label="item.label"
-          width="180"
-        >
-        </el-table-column>
-      </el-table>
-    </div>
+  <div style="width: 100%; height: 100%;">
+    <div v-for="item in tableData1" :key="item.orderName" @click="do_EventCenter_messageSuccess(item)">{{
+        item.orderName
+    }} - {{ item.orderStatus }}</div>
+    <img :src="imgSrc" alt="">
   </div>
 </template>
 
@@ -31,7 +15,7 @@ const zipObject = (arr1, arr2) => {
   });
   return ret;
 };
-
+import { queryAssetById } from './api/asset'
 export default {
   props: {
     dataSource: {
@@ -51,33 +35,16 @@ export default {
     },
     updateProcess: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
   },
   data() {
     return {
-      demoTableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
+      tableData1: [],
+      // imgSrc: require('./asset/客户验收.png')
+      imgSrc: require('./asset/发起订单.png'),
+      orderStatus: '',
+      orderName: ''
     };
   },
   computed: {
@@ -94,6 +61,46 @@ export default {
     },
   },
   mounted() {
+    // queryAssetById('2a898169-ae11-46aa-aa86-76cc8c04b2d4').then(res => {
+    //   this.tableData1 = this.translatePlatformDataToJsonArray(res)
+    //   // console.log(this.tableData1);
+    // })
+    this.getDataInfo()
+    setInterval(() => {
+      this.getDataInfo()
+      this.tableData1.forEach(item => {
+        if (this.orderName == item.orderName) {
+          this.orderStatus = item.orderStatus
+        }
+      })
+      // console.log(this.orderStatus);
+      switch (this.orderStatus) {
+        case '发起订单':
+          this.imgSrc = require('./asset/发起订单.png');
+          break;
+        case '订单审核':
+          this.imgSrc = require('./asset/订单审核.png');
+          break;
+        case '订单确认':
+          this.imgSrc = require('./asset/订单确认.png');
+          break;
+        case '订单拆解':
+          this.imgSrc = require('./asset/订单拆解.png');
+          break;
+        case '订单开发':
+          this.imgSrc = require('./asset/订单拆解.png');
+          break;
+        case '订单集成验证':
+          this.imgSrc = require('./asset/订单集成验证.png');
+          break;
+        case '客户验收':
+          this.imgSrc = require('./asset/客户验收.png');
+          break;
+        case '订单完成':
+          this.imgSrc = require('./asset/订单完成.png');
+          break;
+      }
+    }, 5000)
     const events = [
       {
         key: "onClick",
@@ -111,12 +118,12 @@ export default {
     const actions = [
       {
         key: "messageSuccess",
-        name: "成功提示",
+        name: "改变状态",
         params: [
           {
-            key: "value",
-            name: "值",
-            dataType: "string",
+            key: "row",
+            name: "行信息",
+            dataType: "object",
           },
         ],
       },
@@ -131,6 +138,29 @@ export default {
     this.updateProcess && this.updateProcess();
   },
   methods: {
+    getDataInfo() {
+      queryAssetById('2a898169-ae11-46aa-aa86-76cc8c04b2d4').then(res => {
+        this.tableData1 = this.translatePlatformDataToJsonArray(res)
+        // console.log(this.tableData1);
+      })
+    },
+    translatePlatformDataToJsonArray(originTableData) {
+      let originTableHeader = originTableData.data[0];
+      let tableHeader = [];
+      originTableHeader.forEach((item) => {
+        tableHeader.push(item.col_name);
+      });
+      let tableBody = originTableData.data[1];
+      let tableData = [];
+      tableBody.forEach((tableItem) => {
+        let temp = {};
+        tableItem.forEach((item, index) => {
+          temp[tableHeader[index]] = item;
+        });
+        tableData.push(temp);
+      });
+      return tableData;
+    },
     clickBt() {
       this.componentId &&
         window.eventCenter?.triggerEvent &&
@@ -140,12 +170,50 @@ export default {
     },
     // 逻辑控制用，不可删，return内容可改
     Event_Center_getName: () => {
-      return "Demo实例";
+      return "成功通";
     },
     do_EventCenter_messageSuccess(param) {
-      console.log(param);
-      alert("动作执行成功！");
+      // console.log(param.orderName);
+      this.orderStatus = param.orderStatus
+      this.orderName = param.orderName
+      switch (this.orderStatus) {
+        case '发起订单':
+          this.imgSrc = require('./asset/发起订单.png');
+          break;
+        case '订单审核':
+          this.imgSrc = require('./asset/订单审核.png');
+          break;
+        case '订单确认':
+          this.imgSrc = require('./asset/订单确认.png');
+          break;
+        case '订单拆解':
+          this.imgSrc = require('./asset/订单拆解.png');
+          break;
+        case '订单开发':
+          this.imgSrc = require('./asset/订单拆解.png');
+          break;
+        case '订单集成验证':
+          this.imgSrc = require('./asset/订单集成验证.png');
+          break;
+        case '客户验收':
+          this.imgSrc = require('./asset/客户验收.png');
+          break;
+        case '订单完成':
+          this.imgSrc = require('./asset/订单完成.png');
+          break;
+      }
     },
   },
 };
 </script>
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+</style>
