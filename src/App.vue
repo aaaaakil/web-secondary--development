@@ -15,7 +15,6 @@ const zipObject = (arr1, arr2) => {
   });
   return ret;
 };
-import { queryAssetById } from './api/asset'
 export default {
   props: {
     dataSource: {
@@ -41,8 +40,8 @@ export default {
   data() {
     return {
       tableData1: [],
-      // imgSrc: require('./asset/客户验收.png')
-      imgSrc: require('./asset/发起订单.png'),
+      // imgSrc: require('./images/客户验收.png')
+      imgSrc: require('../images/orderStart.png'),
       orderStatus: '',
       orderName: '',
     };
@@ -61,10 +60,6 @@ export default {
     },
   },
   mounted() {
-    // queryAssetById('2a898169-ae11-46aa-aa86-76cc8c04b2d4').then(res => {
-    //   this.tableData1 = this.translatePlatformDataToJsonArray(res)
-    //   // console.log(this.tableData1);
-    // })
     this.getDataInfo()
     setInterval(() => {
       this.getDataInfo()
@@ -177,34 +172,34 @@ export default {
     changeStatus() {
       switch (this.orderStatus) {
         case '1':
-          this.imgSrc = require('./asset/发起订单.png');
+          this.imgSrc = require('../images/orderStart.png');
           break;
         case '2':
-          this.imgSrc = require('./asset/订单审核.png');
+          this.imgSrc = require('../images/orderCheck.png');
           break;
         case '3':
-          this.imgSrc = require('./asset/订单确认.png');
+          this.imgSrc = require('../images/orderQR.png');
           break;
         case '4':
-          this.imgSrc = require('./asset/订单拆解.png');
+          this.imgSrc = require('../images/orderCJ.png');
           break;
         case '5':
-          this.imgSrc = require('./asset/订单开发.png');
+          this.imgSrc = require('../images/orderDevelop.png');
           break;
         case '6':
-          this.imgSrc = require('./asset/订单集成验证.png');
+          this.imgSrc = require('../images/orderAllCheck.png');
           break;
         case '7':
-          this.imgSrc = require('./asset/客户验收.png');
+          this.imgSrc = require('../images/custormQR.png');
           break;
         case '8':
-          this.imgSrc = require('./asset/订单完成.png');
+          this.imgSrc = require('../images/orderOver.png');
           break;
         case '9':
-          this.imgSrc = require('./asset/订单审核.png');
+          this.imgSrc = require('../images/orderCheck.png');
           break;
         case '10':
-          this.imgSrc = require('./asset/订单审核.png');
+          this.imgSrc = require('../images/orderCheck.png');
           break;
       }
     }
