@@ -37,7 +37,7 @@ if (dom) {
 } else {
   if (process.env.NODE_ENV !== "production") {
     const dataSource = JSON.parse(
-      '[["衬衫","高跟鞋","裤子","袜子","雪纺衫","羊毛衫"],[5,10,10,17,36,20]]'
+      '[["order_name","client_name","business_status"],["123","1231","1"],["456","4561","2"],["789","7891","3"],["147","1471","4"]]'
     );
     const options = {
       externalVariables: {
