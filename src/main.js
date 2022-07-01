@@ -36,9 +36,7 @@ if (dom) {
   }).$mount(wrapper);
 } else {
   if (process.env.NODE_ENV !== "production") {
-    const dataSource = JSON.parse(
-      '[["order_name","client_name","business_status"],["123","1231","1"],["456","4561","2"],["789","7891","3"],["147","1471","4"]]'
-    );
+    const dataSource = [];
     const options = {
       externalVariables: {
         fontSize: "20px",

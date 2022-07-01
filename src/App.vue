@@ -1,8 +1,5 @@
 <template>
   <div style="width: 100%; height: 100%;">
-    <div v-for="item in tableData1" :key="item.data_id" @click="do_EventCenter_messageSuccess(item)">{{
-        item.order_name
-    }} - {{ item.business_status }}</div>
     <img :src="imgSrc" alt="">
   </div>
 </template>
@@ -71,23 +68,23 @@ export default {
       // console.log(this.orderStatus);
       this.changeStatus()
     }, 5000)
-    const events = [
-      {
-        key: "onClick",
-        name: "点击",
-        payload: [
-          {
-            name: "名称",
-            dataType: "string",
-            key: "name",
-          },
-        ],
-      },
-    ];
+    // const events = [
+    //   {
+    //     key: "onClick",
+    //     name: "点击",
+    //     payload: [
+    //       {
+    //         name: "名称",
+    //         dataType: "string",
+    //         key: "name",
+    //       },
+    //     ],
+    //   },
+    // ];
 
     const actions = [
       {
-        key: "messageSuccess",
+        key: "getRow",
         name: "改变状态",
         params: [
           {
@@ -138,11 +135,14 @@ export default {
     Event_Center_getName: () => {
       return "成功通";
     },
-    do_EventCenter_messageSuccess(param) {
-      console.log({ "产品订单名称": param.order_name, "客户名称": param.client_name, "订单状态": this.changeTime(param.business_status), "期望交付时间": new Date(param.expected_delivery_time).toLocaleString(), "计划交付时间": param.plan_delivery_time ? new Date(param.plan_delivery_time).toLocaleString() : '还未确定交付时间' })
+    do_EventCenter_getRow(param) {
+      // {
+      //   row:{}
+      // }
+      console.log({ "产品订单名称": param.row.order_name, "客户名称": param.client_name, "订单状态": this.changeTime(param.business_status), "期望交付时间": new Date(param.expected_delivery_time).toLocaleString(), "计划交付时间": param.plan_delivery_time ? new Date(param.plan_delivery_time).toLocaleString() : '还未确定交付时间' })
       // console.log(param.orderName);
-      this.orderStatus = param.business_status
-      this.orderName = param.order_name
+      this.orderStatus = param.row.business_status
+      this.orderName = param.row.order_name
       this.changeStatus()
     },
     changeTime(a) {
