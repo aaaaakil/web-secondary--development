@@ -38,7 +38,7 @@ export default {
     return {
       tableData1: [],
       // imgSrc: require('./images/客户验收.png')
-      imgSrc: require('../images/orderStart.png'),
+      imgSrc: require('../images/orderStart.png').default,
       orderStatus: '',
       orderName: '',
     };
@@ -61,26 +61,26 @@ export default {
     setInterval(() => {
       this.getDataInfo()
       this.tableData1.forEach(item => {
-        if (this.orderName == item.order_name) {
-          this.orderStatus = item.business_status
+        if (this.orderName == item.产品订单名称) {
+          this.orderStatus = item.订单状态
         }
       })
       // console.log(this.orderStatus);
       this.changeStatus()
     }, 5000)
-    // const events = [
-    //   {
-    //     key: "onClick",
-    //     name: "点击",
-    //     payload: [
-    //       {
-    //         name: "名称",
-    //         dataType: "string",
-    //         key: "name",
-    //       },
-    //     ],
-    //   },
-    // ];
+    const events = [
+      // {
+      //   key: "onClick",
+      //   name: "点击",
+      //   payload: [
+      //     {
+      //       name: "名称",
+      //       dataType: "string",
+      //       key: "name",
+      //     },
+      //   ],
+      // },
+    ];
 
     const actions = [
       {
@@ -139,68 +139,70 @@ export default {
       // {
       //   row:{}
       // }
-      console.log({ "产品订单名称": param.row.order_name, "客户名称": param.client_name, "订单状态": this.changeTime(param.business_status), "期望交付时间": new Date(param.expected_delivery_time).toLocaleString(), "计划交付时间": param.plan_delivery_time ? new Date(param.plan_delivery_time).toLocaleString() : '还未确定交付时间' })
+      // console.log({ "产品订单名称": param.row.产品订单名称, "客户名称": param.client_name, "订单状态": this.changeTime(param.business_status), "期望交付时间": new Date(param.expected_delivery_time).toLocaleString(), "计划交付时间": param.plan_delivery_time ? new Date(param.plan_delivery_time).toLocaleString() : '还未确定交付时间' })
       // console.log(param.orderName);
-      this.orderStatus = param.row.business_status
-      this.orderName = param.row.order_name
+      this.orderStatus = param.row.订单状态
+      this.orderName = param.row.产品订单名称
       this.changeStatus()
     },
-    changeTime(a) {
-      switch (a) {
-        case '1':
-          return '部长初审中';
-        case '2':
-          return '厂长审核中'
-        case '3':
-          return '订单确认中'
-        case '4':
-          return '订单拆解中'
-        case '5':
-          return '订单开发中'
-        case '6':
-          return '集成验证中'
-        case '7':
-          return '订单验收中'
-        case '8':
-          return '已完成'
-        case '9':
-          return '部长初审不通过'
-        case '10':
-          return '厂长审核不通过'
-      }
-    },
+    // changeTime(a) {
+    //   switch (a) {
+    //     case '1':
+    //       return '部长初审中';
+    //     case '2':
+    //       return '厂长审核中'
+    //     case '3':
+    //       return '订单确认中'
+    //     case '4':
+    //       return '订单拆解中'
+    //     case '5':
+    //       return '订单开发中'
+    //     case '6':
+    //       return '集成验证中'
+    //     case '7':
+    //       return '订单验收中'
+    //     case '8':
+    //       return '已完成'
+    //     case '9':
+    //       return '部长初审不通过'
+    //     case '10':
+    //       return '厂长审核不通过'
+    //   }
+    // },
     changeStatus() {
       switch (this.orderStatus) {
-        case '1':
-          this.imgSrc = require('../images/orderStart.png');
+        case '部长初审中':
+          this.imgSrc = require('../images/orderStart.png').default;
           break;
-        case '2':
-          this.imgSrc = require('../images/orderCheck.png');
+        case '厂长审核中':
+          this.imgSrc = require('../images/orderCheck.png').default;
           break;
-        case '3':
-          this.imgSrc = require('../images/orderQR.png');
+        case '订单确认中':
+          this.imgSrc = require('../images/orderQR.png').default;
           break;
-        case '4':
-          this.imgSrc = require('../images/orderCJ.png');
+        case '订单拆解中':
+          this.imgSrc = require('../images/orderCJ.png').default;
           break;
-        case '5':
-          this.imgSrc = require('../images/orderDevelop.png');
+        case '订单开发中':
+          this.imgSrc = require('../images/orderDevelop.png').default;
           break;
-        case '6':
-          this.imgSrc = require('../images/orderAllCheck.png');
+        case '集成验证中':
+          this.imgSrc = require('../images/orderAllCheck.png').default;
           break;
-        case '7':
-          this.imgSrc = require('../images/custormQR.png');
+        case '订单验收中':
+          this.imgSrc = require('../images/custormQR.png').default;
           break;
-        case '8':
-          this.imgSrc = require('../images/orderOver.png');
+        case '已完成':
+          this.imgSrc = require('../images/orderOver.png').default;
           break;
-        case '9':
-          this.imgSrc = require('../images/orderCheck.png');
+        case '部长初审不通过':
+          this.imgSrc = require('../images/orderCheck.png').default;
           break;
-        case '10':
-          this.imgSrc = require('../images/orderCheck.png');
+        case '厂长审核不通过':
+          this.imgSrc = require('../images/orderCheck.png').default;
           break;
+        default:
+          this.imgSrc = require('../images/orderStart.png').default;
       }
     }
   },
