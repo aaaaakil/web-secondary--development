@@ -226,7 +226,7 @@ export default class App extends Component {
                 label: {
                   position: "insideMiddleBottom",
                   formatter: this.markingText ? this.markingText : "test",
-                  fontSize: this.tipLineFontSize ? this.tipLineFontSize : "32px",
+                  fontSize: this.markingTextSize ? this.markingTextSize : "32px",
                 },
                 lineStyle: {
                   normal: {

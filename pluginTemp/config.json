@@ -1,7 +1,7 @@
 {
-  "id": "173f294e-30c9-465b-a871-35e5c232f19f",
+  "id": "a4b825b8-e530-4e75-944b-64d7c421cfdc",
   "type": "analyzer",
-  "main": "main.bdf1f838.js",
+  "main": "main.d5dd2ee1.js",
   "version": "2",
   "props": {
     "img": "custom_table.png",
@@ -12,7 +12,7 @@
     "domId": "ex_46fbe360-daa5-42af-8ca0-2ec3066ef216",
     "lib": [],
     "cssDep": [],
-    "scriptName": "main.b42fe2f5.js",
+    "scriptName": "main.d5dd2ee1.js",
     "vars": [
       "barColor",
       "lineColor",

@@ -25,7 +25,9 @@ if (process.env.NODE_ENV !== "production") {
     externalVariables: {
       barColor: null,
       lineColor: null,
-      tipLineFontSize: null,
+      markTextSize: null,
+      titleText:'233',
+      titlePosition:'right',
       markPosition: "",
       xFontSize:'',
       xFontFamily:'',
