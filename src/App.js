@@ -50,15 +50,15 @@ export default class App extends Component {
     if (props.options.externalVariables) {
       this.barColor = props.options.externalVariables.barColor;
       this.lineColor = props.options.externalVariables.lineColor;
-      this.markingTextSize = props.options.externalVariables.markingTextSize;
-      this.markingPosition = props.options.externalVariables.markingPosition;
+      this.markingTextSize = props.options.externalVariables.markTextSize;
+      this.markingPosition = props.options.externalVariables.markPosition;
       this.markingText = props.options.externalVariables.markingText;
       this.titleText = props.options.externalVariables.titleText;
       this.titlePosition = props.options.externalVariables.titlePosition;
-      this.xAxisFontSize = props.options.externalVariables.xAxisFontSize;
-      this.xAxisFontFamily = props.options.externalVariables.xAxisFontFamily;
-      this.numberFontSize = props.options.externalVariables.numberFontSize;
-      this.numberFontFamily = props.options.externalVariables.numberFontFamily;
+      this.xAxisFontSize = props.options.externalVariables.xFontSize;
+      this.xAxisFontFamily = props.options.externalVariables.xFontFamily;
+      this.numberFontSize = props.options.externalVariables.numFontSize;
+      this.numberFontFamily = props.options.externalVariables.numFontFamily;
     }
   }
   initEcharts(data) {

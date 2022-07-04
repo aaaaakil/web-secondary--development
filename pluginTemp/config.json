@@ -16,15 +16,15 @@
     "vars": [
       "barColor",
       "lineColor",
-      "markingTextSize",
-      "markingPosition",
+      "markTextSize",
+      "markPosition",
       "markingText",
       "titleText",
       "titlePosition",
-      "xAxisFontSize",
-      "xAxisFontFamily",
-      "numberFontSize",
-      "numberFontFamily"
+      "xFontSize",
+      "xFontFamily",
+      "numFontSize",
+      "numFontFamily"
     ],
     "optionModules": []
   }
