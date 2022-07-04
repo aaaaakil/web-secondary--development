@@ -1,6 +1,9 @@
 <template>
-  <div style="width: 100%; height: 100%;">
+  <div style="width: 100%; height: 100%;position: relative;">
     <img :src="imgSrc" alt="">
+    <div :style="{ fontSize: titleFontSize + 'px', fontFamily: titleFontFamily, color: titleFontColor }"
+      class="fontPosition">{{ orderName }}
+    </div>
   </div>
 </template>
 
@@ -37,10 +40,12 @@ export default {
   data() {
     return {
       tableData1: [],
-      // imgSrc: require('./images/客户验收.png')
       imgSrc: require('../images/orderStart.png').default,
       orderStatus: '',
       orderName: '',
+      titleFontSize: this.options.externalVariables.titleFontSize ? this.options.externalVariables.titleFontSize : 16,
+      titleFontFamily: this.options.externalVariables.titleFontFamily ? this.options.externalVariables.titleFontFamily : '微软雅黑',
+      titleFontColor: this.options.externalVariables.titleFontColor ? this.options.externalVariables.titleFontColor : '#fff'
     };
   },
   computed: {
@@ -65,7 +70,6 @@ export default {
           this.orderStatus = item.订单状态
         }
       })
-      // console.log(this.orderStatus);
       this.changeStatus()
     }, 5000)
     const events = [
@@ -136,39 +140,10 @@ export default {
       return "成功通";
     },
     do_EventCenter_getRow(param) {
-      // {
-      //   row:{}
-      // }
-      // console.log({ "产品订单名称": param.row.产品订单名称, "客户名称": param.client_name, "订单状态": this.changeTime(param.business_status), "期望交付时间": new Date(param.expected_delivery_time).toLocaleString(), "计划交付时间": param.plan_delivery_time ? new Date(param.plan_delivery_time).toLocaleString() : '还未确定交付时间' })
-      // console.log(param.orderName);
       this.orderStatus = param.row.订单状态
       this.orderName = param.row.产品订单名称
       this.changeStatus()
     },
-    // changeTime(a) {
-    //   switch (a) {
-    //     case '1':
-    //       return '部长初审中';
-    //     case '2':
-    //       return '厂长审核中'
-    //     case '3':
-    //       return '订单确认中'
-    //     case '4':
-    //       return '订单拆解中'
-    //     case '5':
-    //       return '订单开发中'
-    //     case '6':
-    //       return '集成验证中'
-    //     case '7':
-    //       return '订单验收中'
-    //     case '8':
-    //       return '已完成'
-    //     case '9':
-    //       return '部长初审不通过'
-    //     case '10':
-    //       return '厂长审核不通过'
-    //   }
-    // },
     changeStatus() {
       switch (this.orderStatus) {
         case '部长初审中':
@@ -217,5 +192,11 @@ export default {
 img {
   width: 100%;
   height: 100%;
+}
+
+.fontPosition {
+  position: absolute;
+  top: 0;
+  left: 40px;
 }
 </style>

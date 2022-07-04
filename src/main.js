@@ -39,7 +39,9 @@ if (dom) {
     const dataSource = [];
     const options = {
       externalVariables: {
-        fontSize: "20px",
+        titleFontSize: '',
+        titleFontFamily: '',
+        titleFontColor: ''
       },
     };
     const props = {

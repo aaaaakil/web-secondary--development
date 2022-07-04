@@ -1,7 +1,7 @@
 {
-  "id": "a51e51a0-18bf-46a0-b6ab-5c5fa2e2c75b",
+  "id": "9af48394-2262-4b9b-9cbd-ad2829537be1",
   "type": "analyzers",
-  "main": "app.ce72de41.js",
+  "main": "app.d96f6115.js",
   "version": "2",
   "baseVersion": "V8R4C50SPC210_RJGC_0620",
   "props": {
@@ -12,10 +12,12 @@
     "domId": "ex_custom_table_15",
     "lib": [],
     "cssDep": [],
-    "scriptName": "app.ce72de41.js",
+    "scriptName": "app.d96f6115.js",
     "optionModules": [],
     "vars": [
-      "fontSize"
+      "titleFontSize",
+      "titleFontFamily",
+      "titleFontColor"
     ]
   }
 }
