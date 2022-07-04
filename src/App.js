@@ -57,8 +57,8 @@ export default class App extends Component {
       this.titlePosition = props.options.externalVariables.titlePosition;
       this.xAxisFontSize = props.options.externalVariables.xFontSize;
       this.xAxisFontFamily = props.options.externalVariables.xFontFamily;
-      this.numberFontSize = props.options.externalVariables.numFontSize;
-      this.numberFontFamily = props.options.externalVariables.numFontFamily;
+      this.numberFontSize = props.options.externalVariables.FontSize;
+      this.numberFontFamily = props.options.externalVariables.FontFamily;
     }
   }
   initEcharts(data) {
@@ -132,6 +132,7 @@ export default class App extends Component {
         y2: "25%",
         borderWidth: 0,
       },
+      animation: false,
       xAxis: [
         {
           splitLine: {
@@ -222,11 +223,10 @@ export default class App extends Component {
                 // type: "average",
                 xAxis: this.markingPosition ? arrx[this.findmarkText(arrx)] : arrx[parseInt(arrx.length * 0.2)],
                 // x:'80px',
-                animation: false,
                 label: {
                   position: "insideMiddleBottom",
                   formatter: this.markingText ? this.markingText : "test",
-                  fontSize: this.markingTextSize ? this.markingTextSize : "32px",
+                  fontSize: this.markingTextSize ? this.markingTextSize : "24px",
                 },
                 lineStyle: {
                   normal: {

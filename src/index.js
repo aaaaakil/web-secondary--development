@@ -26,13 +26,14 @@ if (process.env.NODE_ENV !== "production") {
       barColor: null,
       lineColor: null,
       markTextSize: null,
-      titleText:'',
-      titlePosition:'',
+      markingText: '',
+      titleText: '',
+      titlePosition: '',
       markPosition: "",
-      xFontSize:'',
-      xFontFamily:'',
-      numFontSize:'',
-      numFontFamily:''
+      xFontSize: '',
+      xFontFamily: '',
+      FontSize: '',
+      FontFamily: ''
     },
   };
   ReactDOM.render(<App dataSource={dataSource} options={options} />, document.getElementById("root"));
