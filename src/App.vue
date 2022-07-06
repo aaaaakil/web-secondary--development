@@ -1,5 +1,6 @@
 <template>
   <div style="width: 100%; height: 100%;position: relative;">
+    <!-- <span @click="do_EventCenter_getRow(item)" v-for="item in tableData1"> {{ item.产品订单名称 }}|</span> -->
     <img :src="imgSrc" alt="">
     <div :style="{ fontSize: titleFontSize + 'px', fontFamily: titleFontFamily, color: titleFontColor }"
       class="fontPosition">{{ orderName }}
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import { queryAssetById } from "./api/asset";
 const zipObject = (arr1, arr2) => {
   const ret = {};
   arr1.forEach((item, index) => {
@@ -39,6 +41,7 @@ export default {
   },
   data() {
     return {
+      timer: '',
       tableData1: [],
       imgSrc: require('../images/orderStart.png').default,
       orderStatus: '',
@@ -63,7 +66,7 @@ export default {
   },
   mounted() {
     this.getDataInfo()
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.getDataInfo()
       this.tableData1.forEach(item => {
         if (this.orderName == item.产品订单名称) {
@@ -71,6 +74,7 @@ export default {
         }
       })
       this.changeStatus()
+      // console.log(1);
     }, 5000)
     const events = [
       // {
@@ -110,8 +114,17 @@ export default {
   },
   methods: {
     getDataInfo() {
-      this.tableData1 = this.all(this.dataSource)
-      // console.log(this.tableData1);
+      queryAssetById('98193042-7217-38b3-6db2-27a6c54ee26f').then(res => {
+        this.tableData1 = []
+        res.data[1].forEach((item, i) => {
+          let obj = {
+            产品订单名称: item[3],
+            订单状态: item[26]
+          }
+          this.tableData1.push(obj)
+        })
+        // console.log(this.tableData1);
+      })
     },
     all(a) {
       let arr = a
@@ -145,6 +158,7 @@ export default {
       this.changeStatus()
     },
     changeStatus() {
+      // debugger
       switch (this.orderStatus) {
         case '部长初审中':
           this.imgSrc = require('../images/orderStart.png').default;
@@ -176,11 +190,45 @@ export default {
         case '厂长审核不通过':
           this.imgSrc = require('../images/orderCheck.png').default;
           break;
+        case '1':
+          this.imgSrc = require('../images/orderStart.png').default;
+          break;
+        case '2':
+          this.imgSrc = require('../images/orderCheck.png').default;
+          break;
+        case '3':
+          this.imgSrc = require('../images/orderQR.png').default;
+          break;
+        case '4':
+          this.imgSrc = require('../images/orderCJ.png').default;
+          break;
+        case '5':
+          this.imgSrc = require('../images/orderDevelop.png').default;
+          break;
+        case '6':
+          this.imgSrc = require('../images/orderAllCheck.png').default;
+          break;
+        case '7':
+          this.imgSrc = require('../images/custormQR.png').default;
+          break;
+        case '8':
+          this.imgSrc = require('../images/orderOver.png').default;
+          break;
+        case '9':
+          this.imgSrc = require('../images/orderCheck.png').default;
+          break;
+        case '10':
+          this.imgSrc = require('../images/orderCheck.png').default;
+          break;
         default:
           this.imgSrc = require('../images/orderStart.png').default;
       }
-    }
+    },
   },
+  beforeDestroy() {
+    clearInterval(this.timer)
+    this.timer = null
+  }
 };
 </script>
 <style scoped>
