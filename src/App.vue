@@ -27,7 +27,7 @@
               </div>
               <div class="row">
                 <div class="red1">正在招</div>
-                <div class="ccontent">{{ item.position }}}</div>
+                <div class="ccontent">{{ item.position }}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -40,14 +40,14 @@
               <div class="row1">
                 <div>
                   <div class="ctitle">{{ item.name }}</div>
-                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }}族 · 工龄{{ item.seniority }}年
+                  <div class="ccontent">{{ item.sex }} · {{ item.age }}岁 · {{ item.nation }} · 工龄{{ item.seniority }}年
                   </div>
                   <div class="lol">{{ item.skills }}</div>
                 </div>
                 <div class="cperson">{{ item.introduce }}</div>
               </div>
               <div class="row">
-                <div style="font-size:16px;color:#7F7F7F">{{ item.position }}}</div>
+                <div style="font-size:16px;color:#7F7F7F;word-wrap: break-word;">{{ item.position }}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
@@ -1042,6 +1042,7 @@ body {
 }
 
 .row {
+  width: 132.83px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
