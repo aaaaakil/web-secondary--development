@@ -27,7 +27,11 @@
               </div>
               <div class="row">
                 <div class="red1">正在招</div>
+<<<<<<< HEAD
                 <div class="ccontent">{{ item.position }}</div>
+=======
+                <div class="ccontent">{{ item.position }}}</div>
+>>>>>>> 9f9036cb8f4a7deb6e82ecdf78bd86de5eed689b
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
