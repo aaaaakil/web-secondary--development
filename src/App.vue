@@ -610,7 +610,7 @@ export default {
       showServe: false,
       url: 'http://www.baidu.com',
       url1: 'http://www.baidu.com',
-      titleImg: require('./../output/images/1c4c7d184fa9d98a46fd36d187204c3.png').default
+      titleImg: require('./../output/images/1c4c7d184fa9d98a46fd36d187204c3.png')
     }
   },
   computed: {
