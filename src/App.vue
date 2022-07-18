@@ -28,7 +28,7 @@
               </div>
               <div class="row">
                 <div class="red1">正在招</div>
-                <div class="ccontent">{{ item.position }}}</div>
+                <div class="ccontent">{{ item.position }}</div>
                 <el-button type="primary">立即联系</el-button>
               </div>
             </div>
