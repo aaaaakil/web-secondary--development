@@ -16,26 +16,18 @@ export default class App extends Component {
   }
   change = () => {
     this.setState({ flag: true })
-    // let aaa = window.location.href
-    // let num = aaa.indexOf('?')
-    // const value = aaa.substr(num + 1)
-    // const arr = value.split('&')
-    // const obj = {}
-    // for (let i = 0; i < arr.length; i++) {
-    //   const split = arr[i].split('=')
-    //   obj[split[0].trim()] = split[1].trim()
-    // }
-    // console.log(obj);
-    // getContentData({ dataId: obj.edit_id, formId: obj.id, viewId: obj.view_id }).then(res => {
-    //   let arr = []
-    //   res.data.forEach(item => {
-    //     arr.push(item.name)
-    //     this.setState({ tabData: arr })
-    //   })
-    //   this.setState({ contentData: res.data })
-    // })
-    getContentData({ dataId: 'c09821f938804950a9745e4e826f2e4d', viewId: 'cb01da8b084c40f88a085d2300affe8c', formId: 'c09821f938804950a9745e4e826f2e4d' }).then(res => {
-      // console.log(res);
+    let aaa = window.location.href
+    console.log(aaa);
+    let num = aaa.indexOf('?')
+    const value = aaa.substr(num + 1)
+    const arr = value.split('&')
+    const obj = {}
+    for (let i = 0; i < arr.length; i++) {
+      const split = arr[i].split('=')
+      obj[split[0].trim()] = split[1].trim()
+    }
+    console.log(obj);
+    getContentData({ dataId: obj.edit_id, formId: obj.id, viewId: obj.view_id }).then(res => {
       let arr = []
       res.data.forEach(item => {
         arr.push(item.name)
@@ -43,6 +35,15 @@ export default class App extends Component {
       })
       this.setState({ contentData: res.data })
     })
+    // getContentData({ dataId: 'c09821f938804950a9745e4e826f2e4d', viewId: 'cb01da8b084c40f88a085d2300affe8c', formId: 'c09821f938804950a9745e4e826f2e4d' }).then(res => {
+    //   // console.log(res);
+    //   let arr = []
+    //   res.data.forEach(item => {
+    //     arr.push(item.name)
+    //     this.setState({ tabData: arr })
+    //   })
+    //   this.setState({ contentData: res.data })
+    // })
   }
   closeMask = () => {
     this.setState({ flag: false, maskeShow: true })
