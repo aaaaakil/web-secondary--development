@@ -52,7 +52,8 @@ if (process.env.NODE_ENV !== "production") {
       title: '步骤7',
       description: '213459874651236584856',
       status: 'wait'
-    }]
+    }
+  ]
   };
 
   new Vue({
