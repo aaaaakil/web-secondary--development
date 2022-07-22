@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%; width: 100%;">
+  <div style="height: 100%; width: 100%;" ref="big">
     <el-steps direction="vertical" :active="this.tableData.length + 1" space="10%" class="steps">
       <el-step v-for="item in tableData" :key="item.title" :title="(item.title)" :description="(item.description)"
         :status="(item.status)"></el-step>
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      tableData: this.customConfig.dataSouce
+      tableData: JSON.parse(this.customConfig.dataSouce)
     }
   },
   computed: {
@@ -45,6 +45,8 @@ export default {
       console.log(a);
       this.tableData[a.index - 1].status = 'finish'
     });
+    this.$refs.big.parentNode.parentNode.height = '100%'
+    console.log(this.$refs.big);
   },
   methods: {
     goToStudy() {

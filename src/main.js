@@ -17,43 +17,7 @@ Vue.use(Step);
 if (process.env.NODE_ENV !== "production") {
   // 添加 customConfig 进行测试
   let customConfig = {
-    dataSouce: [
-    {
-      title: '步骤1',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤2',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤3',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤4',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤5',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤6',
-      description: '213459874651236584856',
-      status: 'wait'
-    },
-    {
-      title: '步骤7',
-      description: '213459874651236584856',
-      status: 'wait'
-    }
-  ]
+    dataSouce: '[{ title: "步骤1", description: "213459874651236584856", status: "wait" }, { title: "步骤1", description: "213459874651236584856", status: "wait" }, { title: "步骤1", description: "213459874651236584856", status: "wait" }]'
   };
 
   new Vue({
