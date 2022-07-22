@@ -1,17 +1,18 @@
 {
-  "id": "3d0de475-d7cb-41dd-8532-2335a5df6ead",
+  "id": "17364516-8468-4dda-93c2-494020076cc4",
   "type": "app",
-  "main": "app.9439dbc9.js",
+  "main": "main.95f6c91f.js",
   "version": "2",
   "props": {
-    "type": "customize",
+    "type": "head",
     "img": "APP_0001.png",
-    "name": "应用二开_vue",
+    "name": "dsadq",
     "loadStyle": 0,
     "lib": [],
     "css_script": [],
     "customconf": [
-      "dataSouce"
+      "title",
+      "url"
     ]
   }
 }
